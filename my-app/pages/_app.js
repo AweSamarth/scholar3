@@ -2,6 +2,7 @@ import '@/styles/globals.css'
 import '@rainbow-me/rainbowkit/styles.css';
 import {
   getDefaultWallets,
+  darkTheme,
   RainbowKitProvider,
 } from '@rainbow-me/rainbowkit';
 import { configureChains, createClient, goerli, WagmiConfig, Chain } from 'wagmi';
@@ -38,7 +39,7 @@ export const mantle ={
 
 
 const { chains, provider } = configureChains(
-  [mantle, mainnet, polygon, optimism, arbitrum, goerli],
+  [mantle],
   [
     jsonRpcProvider({
       rpc:chain=>({http:chain.rpcUrls.default.http[0]})
@@ -60,7 +61,7 @@ const wagmiClient = createClient({
 export default function App({ Component, pageProps }) {
   return (
     <WagmiConfig client={wagmiClient}>
-    <RainbowKitProvider chains={chains}>
+    <RainbowKitProvider chains={chains} theme={darkTheme()} modalSize="compact" initialChain={mantle}>
   <Component {...pageProps} />
 
   </RainbowKitProvider>
