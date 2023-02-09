@@ -27,7 +27,6 @@ export default function Home() {
               largeScreen: true,
             }}
 
-            chainStatus="none"
           
           
           />
