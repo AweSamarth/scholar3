@@ -60,6 +60,7 @@ export default function Home() {
             height={37}
             priority
           />
+          <p className=" font-extralight ">something or the other that may or may not be going on</p>
           <div className={styles.thirteen}>
             <Image
               src="/thirteen.svg"
