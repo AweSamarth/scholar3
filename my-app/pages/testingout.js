@@ -2,13 +2,28 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
-import { ConnectButton, midnightTheme, darkTheme } from "@rainbow-me/rainbowkit";
-import { abi, RESEARCH_CONTRACT_ADDRESS } from "@/constants";
-import { Contract, providers, utils } from "ethers";
+import { ConnectButton} from "@rainbow-me/rainbowkit";
+import { RESEARCH_CONTRACT_ADDRESS, abi} from "@/constants";
+import { Contract, providers, utils ,BigNumber } from "ethers";
+import { useAccount, useProvider, useContractRead, useConnect } from "wagmi";
 const inter = Inter({ subsets: ["latin"] });
-
-
+// if (account!=null){
+// const {address, isConnecting, isDisconnected} = useAccount()
+// }
 export default function Home() {
+
+    const {address, isConnecting, isDisconnected, isConnected} = useAccount()
+    const { connect, connectors, error, isLoading, pendingConnector } =useConnect()
+    const contractHua = useContractRead({
+        address:RESEARCH_CONTRACT_ADDRESS,
+        abi: abi,
+        functionName:"getTime",
+        
+    }).data._hex
+    const something =BigNumber.from(contractHua).toString()
+
+
+    console.log(contractHua)
   return (
     <>
       <Head>
@@ -51,25 +66,8 @@ export default function Home() {
           </div>
         </div>
 
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-          <p className=" font-extralight ">something or the other that may or may not be going on</p>
-          <div className={styles.thirteen}>
-            <Image
-              src="/thirteen.svg"
-              alt="13"
-              width={40}
-              height={31}
-              priority
-            />
-          </div>
+        <div className={styles.center+" font-extralight"}>
+
         </div>
 
         <div className={styles.grid}>
