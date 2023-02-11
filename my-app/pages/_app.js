@@ -1,5 +1,7 @@
 import '@/styles/globals.css'
 import '@rainbow-me/rainbowkit/styles.css';
+import dynamic from 'next/dynamic'
+
 import {
   getDefaultWallets,
   darkTheme,
@@ -58,7 +60,7 @@ const wagmiClient = createClient({
   provider
 })
 
-export default function App({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   return (
     <WagmiConfig client={wagmiClient}>
     <RainbowKitProvider chains={chains} theme={darkTheme()} modalSize="compact" initialChain={mantle}>
@@ -68,3 +70,6 @@ export default function App({ Component, pageProps }) {
     </WagmiConfig>
   )
 }
+export default dynamic(() => Promise.resolve(App), {
+  ssr: false,
+});
