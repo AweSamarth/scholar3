@@ -23,16 +23,14 @@ contract Research{
 
 
     function newResearcher(string memory theName) public{
-        bytes memory temp = bytes(theName);
-        require(temp.length>0);
-
         profileMapping[msg.sender].name=theName;
         profileMapping[msg.sender].joinDate= block.timestamp;
 
     }
-    function viewResearcher() public view returns(Researcher memory){
-        return profileMapping[msg.sender];
+    function viewResearcher(address theAddress) public view returns(Researcher memory){
+        return profileMapping[theAddress];
     }
+
 
     function addPaper(string memory _title, string memory cid) public{
         ResearchPaper memory temp = ResearchPaper({title:_title, uploadDate:block.timestamp, paperCid:cid, theAddress:msg.sender });
@@ -41,8 +39,8 @@ contract Research{
 
     }
 
-    function viewOnesPapers() public view returns(string[] memory) {
-        return profileMapping[msg.sender].paperCidArray;
+    function viewOnesPapers(address theAddress) public view returns(string[] memory) {
+        return profileMapping[theAddress].paperCidArray;
     }
 
 
