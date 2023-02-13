@@ -1,27 +1,13 @@
-import { useStorageUpload } from "@thirdweb-dev/react";
+import { useStorageUpload, useAddress } from "@thirdweb-dev/react";
+import React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "@next/font/google";
-import { RESEARCH_CONTRACT_ADDRESS, abi } from "@/constants";
-import { Contract, providers, utils, BigNumber } from "ethers";
-import {
-  useAccount,
-  useProvider,
-  useContractRead,
-  useConnect,
-  usePrepareContractWrite,
-  useContractWrite,
-} from "wagmi";
-import { mantle } from "./_app";
+import  {useAccount} from "wagmi"
 
-
-const inter = Inter({ subsets: ["latin"] });
 export default function Component() {
-
   const { address, isConnecting, isDisconnected, isConnected } = useAccount();
-  const { mutateAsync:upload} = useStorageUpload();
+
+  const { mutateAsync: upload } = useStorageUpload();
   const [checker, setChecker] = useState("");
   const [doesExist, setDoesExist] = useState(0)
   const onDrop = useCallback(
@@ -46,18 +32,18 @@ export default function Component() {
   return (
     <div className="border-2 flex-col border-white h-full  min-h-screen bg-[#161616] text-white py-4 px-72" >
       <div className="font-[Poppins] font-bold  text-[2.1em] w-[100%] text-center text-[#F8F8F8]  mb-1">
-        IPFS Uploader
+        Publish A Paper
       </div>
       <div className="font-[Inter] font-light  text-center text-[1.3em] text-[#b1b1b1] mb-[-4px]">
-        Upload your files to IPFS.
+        Upload your research paper to IPFS.
       </div>
       <div className="font-[Inter] font-light  text-center text-[1.3em] text-[#b1b1b1]  mb-6">
         With ZERO hassle.{" "}
       </div>
       <div className="font-[Inter] font-light text-[1.2em] text-white mb-4 ">
-        This portal allows you to upload literally anything you want to
+        This portal allows you to upload your research paper to
         <span className=" text-[#4b9ea1]"> IPFS:</span> A free, permanent and
-        decentralized storage protocol. 
+        decentralized storage protocol. Just enter your paper's title and upload it. We'll take care of the rest
       </div>
       <div
       id="draggist"
@@ -71,7 +57,7 @@ export default function Component() {
       </div>
       <div className="border-2 flex align-middle">
         <div className="border-2 px-2 h-min self-center ">Send me the unique link as an NFT:</div> 
-        
+        <div className=" focus:outline-none"></div>
         <div>{address !=undefined? address:""}</div>
       </div>
       <div>{checker != "" ? <a href={"https://dweb.link/"+checker}>File uploaded successfully {checker}!</a> : ""}</div>

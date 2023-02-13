@@ -25,10 +25,9 @@ export default function Home() {
   }, [])
   
   const [alreadyMember, setAlreadyMember] = useState(false);
-  const [param, setParam] = useState("Somebody")
   const { address, isConnecting, isDisconnected, isConnected } = useAccount();
   const { connect, connectors, isLoading, pendingConnector } = useConnect();
-
+  const [name, setName] = useState("")
   readViewResearcher = useContractRead({
     address: RESEARCH_CONTRACT_ADDRESS,
     abi: abi,
@@ -44,13 +43,16 @@ export default function Home() {
     console.log(address)
   }
   
+   function nameChange(event){
+     setName(event.target.value)
+  }
   
 
   const newResearcherconfig = usePrepareContractWrite({
     address: RESEARCH_CONTRACT_ADDRESS,
     abi: abi,
     functionName: "newResearcher",
-    args: [param],
+    args: [name],
   }).config;
   const newResearcher  =  useContractWrite(newResearcherconfig).write;
  
@@ -82,6 +84,7 @@ export default function Home() {
         </div>
 
         <div className="font-extralight ml-4">
+          <input type="text" value={name} onChange={nameChange} className=" bg-gray-800 rounded-md h-8 mr-4 select-none outline-none pl-2"/>
           <button
             className="bg-blue-500 p-2 rounded-sm"
             onClick={()=>newResearcher()}
