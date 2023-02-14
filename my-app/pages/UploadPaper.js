@@ -5,6 +5,8 @@ import { useDropzone } from "react-dropzone";
 import { useAccount } from "wagmi";
 import { usePrepareContractWrite, useContractWrite } from "wagmi";
 import { abi, RESEARCH_CONTRACT_ADDRESS } from "../constants";
+import { watchContractEvent } from '@wagmi/core'
+
 
 export default function Component() {
   const { address, isConnecting, isDisconnected, isConnected } = useAccount();
@@ -14,6 +16,8 @@ export default function Component() {
   const [doesExist, setDoesExist] = useState(0);
   const [disabled, setDisabled] = useState(true)
   const [ipfsCid, setIpfsCid] = useState("")
+
+
 
   const onDrop = useCallback(
     async (acceptedFiles) => {

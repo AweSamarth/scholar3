@@ -1,4 +1,55 @@
-export const abi =[
+export const abi = [
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "theAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "paperCid",
+        "type": "string"
+      }
+    ],
+    "name": "PaperUploaded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "theAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "theName",
+        "type": "string"
+      }
+    ],
+    "name": "ProfileCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "theAddress",
+        "type": "address"
+      }
+    ],
+    "name": "ViewedLmao",
+    "type": "event"
+  },
   {
     "inputs": [
       {
@@ -14,6 +65,47 @@ export const abi =[
     ],
     "name": "addPaper",
     "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "cid",
+        "type": "string"
+      }
+    ],
+    "name": "cidToPaper",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "theAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "uploadDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "paperCid",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct Research.ResearchPaper",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -99,5 +191,5 @@ export const abi =[
     "type": "function"
   }
 ]
-export const RESEARCH_CONTRACT_ADDRESS="0x64647504033fC18fa34713e35C3b336B41E66Bb4"
+export const RESEARCH_CONTRACT_ADDRESS="0xA81F6E414C18494BeeB87ec9DEf27cD2497d5927"
 

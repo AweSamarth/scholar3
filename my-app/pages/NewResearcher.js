@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { RESEARCH_CONTRACT_ADDRESS, abi } from "@/constants";
+import { RESEARCH_CONTRACT_ADDRESS, abi } from "../constants";
 import { Contract, providers, utils, BigNumber } from "ethers";
 import {
   useAccount,
@@ -11,6 +11,7 @@ import {
   useConnect,
   usePrepareContractWrite,
   useContractWrite,
+  useContractEvent
 } from "wagmi";
 import { useEffect, useState } from "react";
 import { mantle } from "./_app";
@@ -23,7 +24,14 @@ export default function Home() {
   useEffect(()=>{
 
   }, [])
-  
+  useContractEvent({
+    address: RESEARCH_CONTRACT_ADDRESS ,
+    abi: abi,
+    eventName: "ProfileCreated",
+    listener(node, label, owner) {
+      console.log(node, label, owner)
+    },
+  })
   const [alreadyMember, setAlreadyMember] = useState(false);
   const { address, isConnecting, isDisconnected, isConnected } = useAccount();
   const { connect, connectors, isLoading, pendingConnector } = useConnect();
@@ -41,8 +49,14 @@ export default function Home() {
     functionName:"viewOnesPapers",
     args:[address]
   })
+
+
   function viewResearcher(){
     console.log(readViewResearcher.data)
+  }
+
+  function viewPaper(){
+    console.log()
   }
 
   function viewOnesPapers(){

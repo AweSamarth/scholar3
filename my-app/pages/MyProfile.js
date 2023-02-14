@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { RESEARCH_CONTRACT_ADDRESS, abi } from "@/constants";
+import { RESEARCH_CONTRACT_ADDRESS, abi } from "../constants";
 import { Contract, providers, utils, BigNumber } from "ethers";
 import {
   useAccount,
@@ -11,12 +11,16 @@ import {
   useConnect,
   usePrepareContractWrite,
   useContractWrite,
+  useContractEvent
 } from "wagmi";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useEffect, useState } from "react";
 import { mantle } from "./_app";
 import { check } from "prettier";
 import { useContract } from "@thirdweb-dev/react";
+import { watchContractEvent } from '@wagmi/core'
+import { RESPONSE_LIMIT_DEFAULT } from "next/dist/server/api-utils";
+
 const inter = Inter({ subsets: ["latin"] });
 // if (account!=null){
 // }
@@ -25,7 +29,17 @@ export default function Home() {
   const { address, isConnecting, isDisconnected, isConnected } = useAccount();
   useEffect(() => {
   }, []);
-  
+
+  useContractEvent({
+    address: RESEARCH_CONTRACT_ADDRESS ,
+    abi: abi,
+    eventName: "ProfileCreated",
+    listener(node, label, owner) {
+      console.log(node, label, owner)
+    },
+    chainId: 1,
+  })
+
   const [alreadyMember, setAlreadyMember] = useState(false);
   const { connect, connectors, isLoading, pendingConnector } = useConnect();
   const [name, setName] = useState("");
@@ -35,16 +49,14 @@ export default function Home() {
     functionName: "viewResearcher",
     args: [address],
   });
-  const { openConnectModal } = useConnectModal();
 
-  // const firstCid = readViewResearcher.data.paperCidArray[0]
 
-  const cidToPaper = useContractRead({
-    address:RESEARCH_CONTRACT_ADDRESS,
-    abi:abi,
-    functionName:"paperMapping"
-
-  })
+  // const onePaper = useContractRead({
+  //   address:RESEARCH_CONTRACT_ADDRESS,
+  //   abi:abi,
+  //   functionName:"cidToPaper",
+  //   args:["ipfs://QmWywcZkAQsUDxLjH5pezDrPgiEKRG8pKoKPMgTtXx8k1X/Time%20Table.png"]
+  // })
 
   const readOnesPapers = useContractRead({
     address: RESEARCH_CONTRACT_ADDRESS,
@@ -56,6 +68,9 @@ export default function Home() {
     console.log(readViewResearcher);
   }
 
+  function viewPaper(){
+    console.log(onePaper.data)
+  }
   function viewOnesPapers() {
     console.log(readOnesPapers.data);
   }
@@ -131,7 +146,7 @@ export default function Home() {
           </button>
           <button
             className="bg-blue-500 ml-3 p-2 rounded-sm"
-            onClick={anotherChecker}
+            onClick={()=>viewPaper()}
           >testing
           </button>
         </div>
