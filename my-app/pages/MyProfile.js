@@ -12,50 +12,63 @@ import {
   usePrepareContractWrite,
   useContractWrite,
 } from "wagmi";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useEffect, useState } from "react";
 import { mantle } from "./_app";
 import { check } from "prettier";
+import { useContract } from "@thirdweb-dev/react";
 const inter = Inter({ subsets: ["latin"] });
 // if (account!=null){
 // }
 export default function Home() {
-  let readViewResearcher
-  useEffect(()=>{
-
-  }, [])
+  let readViewResearcher;
+  const { address, isConnecting, isDisconnected, isConnected } = useAccount();
+  useEffect(() => {
+  }, []);
   
   const [alreadyMember, setAlreadyMember] = useState(false);
-  const { address, isConnecting, isDisconnected, isConnected } = useAccount();
   const { connect, connectors, isLoading, pendingConnector } = useConnect();
-  const [name, setName] = useState("")
+  const [name, setName] = useState("");
   readViewResearcher = useContractRead({
     address: RESEARCH_CONTRACT_ADDRESS,
     abi: abi,
     functionName: "viewResearcher",
-    args:[address]
+    args: [address],
   });
+  const { openConnectModal } = useConnectModal();
 
-  const readOnesPapers = useContractRead({
+  // const firstCid = readViewResearcher.data.paperCidArray[0]
+
+  const cidToPaper = useContractRead({
     address:RESEARCH_CONTRACT_ADDRESS,
     abi:abi,
-    functionName:"viewOnesPapers",
-    args:[address]
+    functionName:"paperMapping"
+
   })
-  function viewResearcher(){
-    console.log(readViewResearcher.data)
+
+  const readOnesPapers = useContractRead({
+    address: RESEARCH_CONTRACT_ADDRESS,
+    abi: abi,
+    functionName: "viewOnesPapers",
+    args: [address],
+  });
+  function viewResearcher() {
+    console.log(readViewResearcher);
   }
 
-  function viewOnesPapers(){
-    console.log(readOnesPapers.data)
+  function viewOnesPapers() {
+    console.log(readOnesPapers.data);
   }
-  function viewMyAddress(){
-    console.log(address)
+  function viewMyAddress() {
+    console.log(address);
   }
-  
-   function nameChange(event){
-     setName(event.target.value)
+
+  function nameChange(event) {
+    setName(event.target.value);
   }
-  
+  function anotherChecker(){
+    console.log(cidToPaper)
+  }
 
   const newResearcherconfig = usePrepareContractWrite({
     address: RESEARCH_CONTRACT_ADDRESS,
@@ -63,9 +76,7 @@ export default function Home() {
     functionName: "newResearcher",
     args: [name],
   }).config;
-  const newResearcher  =  useContractWrite(newResearcherconfig).write;
- 
-  
+  const newResearcher = useContractWrite(newResearcherconfig).write;
 
   // console.log(contractHua);
 
@@ -78,6 +89,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="bg-black border-2 border-red-600 h-[100vh] text-white">
+        <div>{"Hello " + readViewResearcher + "!"}</div>
+
         <div className="bg-black mt-4 mb-4 ml-4">
           <ConnectButton
             accountStatus={{
@@ -89,14 +102,12 @@ export default function Home() {
               largeScreen: true,
             }}
           />
-
         </div>
 
         <div className="font-extralight ml-4">
-          <input type="text" value={name} onChange={nameChange} className=" bg-gray-800 rounded-md h-8 mr-4 select-none outline-none pl-2"/>
           <button
             className="bg-blue-500 p-2 rounded-sm"
-            onClick={()=>newResearcher()}
+            onClick={() => newResearcher()}
           >
             writer
           </button>
@@ -117,6 +128,11 @@ export default function Home() {
             onClick={() => viewOnesPapers()}
           >
             view papercid
+          </button>
+          <button
+            className="bg-blue-500 ml-3 p-2 rounded-sm"
+            onClick={anotherChecker}
+          >testing
           </button>
         </div>
       </main>

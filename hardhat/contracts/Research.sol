@@ -20,6 +20,9 @@ contract Research{
     mapping  (address=>Researcher) profileMapping;
     mapping  (string=>ResearchPaper) paperMapping;
 
+    function cidToPaper(string memory cid) public view returns(ResearchPaper memory){
+        return paperMapping[cid]
+    }
 
 
     function newResearcher(string memory theName) public{
