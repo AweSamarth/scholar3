@@ -1,9 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
-import styles from "@/styles/Home.module.css";
+import styles from "../styles/Home.module.css";
 import { ConnectButton, midnightTheme, darkTheme } from "@rainbow-me/rainbowkit";
-import { abi, RESEARCH_CONTRACT_ADDRESS } from "@/constants";
+import { abi, RESEARCH_CONTRACT_ADDRESS } from "../constants";
 import { Contract, providers, utils } from "ethers";
 const inter = Inter({ subsets: ["latin"] });
 

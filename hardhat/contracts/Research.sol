@@ -3,6 +3,10 @@ pragma solidity ^0.8.18;
 
 contract Research{
 
+    event ProfileCreated(address indexed theAddress, string theName);
+    event PaperUploaded(address indexed theAddress, string  paperCid);
+
+
     struct Researcher{
         string name;
         uint256 joinDate;
@@ -20,29 +24,32 @@ contract Research{
     mapping  (address=>Researcher) profileMapping;
     mapping  (string=>ResearchPaper) paperMapping;
 
+    function cidToPaper(string memory cid) public view returns(ResearchPaper memory){
+        return paperMapping[cid];
+        
+    }
 
 
     function newResearcher(string memory theName) public{
-        bytes memory temp = bytes(theName);
-        require(temp.length>0);
-
         profileMapping[msg.sender].name=theName;
         profileMapping[msg.sender].joinDate= block.timestamp;
+        emit ProfileCreated(msg.sender, theName);
+    }
+    function viewResearcher(address theAddress) public view returns(Researcher memory){
+        return profileMapping[theAddress];
+    }
 
-    }
-    function viewResearcher() public view returns(Researcher memory){
-        return profileMapping[msg.sender];
-    }
 
     function addPaper(string memory _title, string memory cid) public{
         ResearchPaper memory temp = ResearchPaper({title:_title, uploadDate:block.timestamp, paperCid:cid, theAddress:msg.sender });
         profileMapping[msg.sender].paperCidArray.push(cid);
         paperMapping[cid] = temp;
+        emit PaperUploaded(msg.sender, cid);
 
     }
 
-    function viewOnesPapers() public view returns(string[] memory) {
-        return profileMapping[msg.sender].paperCidArray;
+    function viewOnesPapers(address theAddress) public view returns(string[] memory) {
+        return profileMapping[theAddress].paperCidArray;
     }
 
 
