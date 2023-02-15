@@ -1,0 +1,40 @@
+{
+  "address": "0x34d1c431BC133507033a249096ED9827277B947F",
+  "abi": [],
+  "transactionHash": "0xde51e8432bdb9c1e51aaffffa8ea9be2ce02319dda7f45377dd4b3e68880d9b7",
+  "receipt": {
+    "to": null,
+    "from": "0xCDF770392F1E5E61725Cc9522c80070134D50eC7",
+    "contractAddress": "0x34d1c431BC133507033a249096ED9827277B947F",
+    "transactionIndex": 49,
+    "gasUsed": "72281",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x15d075e955fde4ead3a285e36b3f6f958ef0aa7088bc464ff323f8c35f95805b",
+    "transactionHash": "0xde51e8432bdb9c1e51aaffffa8ea9be2ce02319dda7f45377dd4b3e68880d9b7",
+    "logs": [],
+    "blockNumber": 8491352,
+    "cumulativeGasUsed": "12093127",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "6fa17cbe32153bb181761c8787ecc940",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.18+commit.87f61d96\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/PriceConverter.sol\":\"PriceConverter\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\ninterface AggregatorV3Interface {\\n  function decimals() external view returns (uint8);\\n\\n  function description() external view returns (string memory);\\n\\n  function version() external view returns (uint256);\\n\\n  function getRoundData(uint80 _roundId)\\n    external\\n    view\\n    returns (\\n      uint80 roundId,\\n      int256 answer,\\n      uint256 startedAt,\\n      uint256 updatedAt,\\n      uint80 answeredInRound\\n    );\\n\\n  function latestRoundData()\\n    external\\n    view\\n    returns (\\n      uint80 roundId,\\n      int256 answer,\\n      uint256 startedAt,\\n      uint256 updatedAt,\\n      uint80 answeredInRound\\n    );\\n}\\n\",\"keccak256\":\"0x6e6e4b0835904509406b070ee173b5bc8f677c19421b76be38aea3b1b3d30846\",\"license\":\"MIT\"},\"contracts/PriceConverter.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\r\\npragma solidity ^0.8.18;\\r\\n\\r\\nimport \\\"@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol\\\";\\r\\n\\r\\nlibrary PriceConverter {\\r\\n  function getPrice(AggregatorV3Interface priceFeed)\\r\\n    internal\\r\\n    view\\r\\n    returns (uint256)\\r\\n  {\\r\\n    (, int256 answer, , , ) = priceFeed.latestRoundData();\\r\\n    // ETH/USD rate in 18 digit\\r\\n    return uint256(answer * 10000000000);\\r\\n  }\\r\\n\\r\\n  // 1000000000\\r\\n  // call it get fiatConversionRate, since it assumes something about decimals\\r\\n  // It wouldn't work for every aggregator\\r\\n  function getConversionRate(uint256 ethAmount, AggregatorV3Interface priceFeed)\\r\\n    internal\\r\\n    view\\r\\n    returns (uint256)\\r\\n  {\\r\\n    uint256 ethPrice = getPrice(priceFeed);\\r\\n    uint256 ethAmountInUsd = (ethPrice * ethAmount) / 1000000000000000000;\\r\\n    // the actual ETH/USD conversation rate, after adjusting the extra 0s.\\r\\n    return ethAmountInUsd;\\r\\n  }\\r\\n}\",\"keccak256\":\"0x77f1592751c4f648bef1d7cfa483c670794d153c8bfce46474499f9b9e3bc7cf\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212203e04d4fb2d9b3b6a2f9c0c28d58f986dcb513bb2dcc93e400f5143247687462164736f6c63430008120033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212203e04d4fb2d9b3b6a2f9c0c28d58f986dcb513bb2dcc93e400f5143247687462164736f6c63430008120033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [],
+    "types": null
+  }
+}
