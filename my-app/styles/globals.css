@@ -19,7 +19,7 @@ body{
   flex-direction: column;
   flex-wrap: wrap;
   padding: 1rem;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   background-image: url("../public/Background.png") ;
 }
@@ -119,7 +119,7 @@ color: #FFFFFF;
 }
 .team{
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   /* display: flex;
   align-items: center;
   flex-direction: column; */
@@ -157,6 +157,28 @@ color: #FFFFFF;
  background: #D9D9D9;
 border-radius: 3.375rem;
 margin: auto;
+}
+footer{
+  width: 100vw;
+  height: 50vh;
+  background-color: #2F2E41;
+  margin: 0;
+  padding: 10px;
+  color: #FFFFFF;
+  /* border-radius: 30px 100px 0 0; */
+  display: flex;
+  align-items: flex-start;
+  /* justify-content: center; */
+  flex-direction: column;
+  background: #2F2E41;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 58px 58px 0 0;
+}
+.logos{
+  display: flex;
+  margin-bottom: auto;
+  margin-top: auto;
+  /* margin: auto; */
 }
 @media screen and (max-width: 650px){
   .hero h1{
@@ -214,5 +236,8 @@ margin: auto;
   .card{
     height: 15rem;
     margin: 5px;
+  }
+  footer{
+    margin-top: auto;
   }
 }
