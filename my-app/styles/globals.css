@@ -1,4 +1,4 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -109,4 +109,8 @@ a {
   html {
     color-scheme: dark;
   }
+} */
+
+*{
+  overflow: hidden;
 }
