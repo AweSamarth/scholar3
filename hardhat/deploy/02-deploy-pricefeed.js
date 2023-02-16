@@ -11,4 +11,4 @@ module.exports= async function({getNamedAccounts, deployments}){
 }
 
 
-module.exports.tags = ["priceconverter"]
+module.exports.tags = ["priceconverter", "all"]

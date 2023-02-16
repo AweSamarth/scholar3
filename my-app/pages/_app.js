@@ -40,7 +40,7 @@ export const mantle ={
 
 
 const { chains, provider } = configureChains(
-  [mantle],
+  [mantle, goerli],
   [
     jsonRpcProvider({
       rpc:chain=>({http:chain.rpcUrls.default.http[0]})
