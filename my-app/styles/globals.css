@@ -1,11 +1,14 @@
 #hello{
   color:black;
 }
+*{
+  /* overflow-x: hidden; */
+}
 body{
   margin: 0;
-  height: 100vh;
+  height: 97.5vh;
   width: 100vw;
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
 }
 .landing{
   padding: 0;
@@ -19,7 +22,7 @@ body{
   flex-direction: column;
   flex-wrap: wrap;
   padding: 1rem;
-  width: 100vw;
+  width: 97vw;
   height: 100%;
   background-image: url("../public/Background.png") ;
 }
@@ -74,7 +77,9 @@ color: #FFFFFF;
   color: #2F2E41;
 }
 .hello{
-  width: 100vw;
+  overflow-y:hidden;
+
+  max-width: 99vw;
   height: 100vh;
   background: #2F2E41;
   padding: 0;
@@ -85,7 +90,7 @@ color: #FFFFFF;
   top: 100px;
   width: 12rem;
 height: 4rem;
-font-style: normal;
+/* font-style: normal; */
 /* font-weight: 800; */
 font-size: 3rem;
 line-height: 4rem;
@@ -108,7 +113,7 @@ color: #FFFFFF;
   flex-direction: column;
   width: 100%;
   height: 7.5rem;
-  font-style: normal;
+  /* font-style: normal; */
   /* font-weight: 400; */
   font-size: 1.75rem;
   line-height: 2.125rem;
@@ -125,12 +130,14 @@ color: #FFFFFF;
   flex-direction: column; */
 }
 .meet{
+  
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
   flex-direction: row;
 }
 .meet h2{
+  
   width: 33rem;
   height: 4rem;
   /* font-weight: 800; */
@@ -139,6 +146,7 @@ color: #FFFFFF;
   color: #000000;
 }
 .meet p{
+  overflow-y:hidden ;
   width: 77.5rem;
   height: 8.1875rem;
   font-size: 1.75rem;
@@ -159,7 +167,7 @@ border-radius: 3.375rem;
 margin: auto;
 }
 footer{
-  width: 100vw;
+  width: 97.5vw;
   height: 50vh;
   background-color: #2F2E41;
   margin: 0;
