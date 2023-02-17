@@ -72,14 +72,30 @@ export default function Home() {
   }
   }
 
-  const bookViewer = async()=>{
-    const viewBook = await contract.viewBook("randomcid")
-    console.log(viewBook)
-  }
-  
+  const bookViewer = useContractRead({
+    address:LIBRARY_CONTRACT_ADDRESS,
+    abi:libraryAbi,
+    functionName:"viewBook",
+    args:[""]
+  })
+
+
+
   const viewMyAddress =()=>{
     console.log(address)
   }
+
+  const readOnesBooks= useContractRead({
+    address:LIBRARY_CONTRACT_ADDRESS,
+    abi:libraryAbi,
+    functionName:"viewAuthorBooks",
+    args:[address]
+  })
+
+  const viewOnesBooks = ()=>{
+    console.log(readOnesBooks.data)
+  }
+
 
   const authorAdder = async() =>{
     try {
@@ -91,6 +107,7 @@ export default function Home() {
   }
 
 
+  const [title, setTitle] = useState("")
 
   const bookAdder = async()=>{
     try {
@@ -154,8 +171,8 @@ export default function Home() {
           </button>
           <button
             className="bg-blue-500 ml-3 p-2 rounded-sm"
-            onClick={()=>viewPaper()}
-          >testing
+            onClick={()=>viewOnesBooks()}
+          >view ones books
           </button>
           <button
             className="bg-blue-500 ml-3 p-2 rounded-sm"
