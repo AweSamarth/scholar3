@@ -1,0 +1,35 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/Research.sol": {
+      "content": "//SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.18;\r\n\r\ncontract Research{\r\n\r\n    struct Researcher{\r\n        string name;\r\n        uint256 joinDate;\r\n        string[] paperCidArray;\r\n\r\n    }\r\n\r\n    struct ResearchPaper{\r\n        address theAddress;\r\n        string title;\r\n        uint256 uploadDate;\r\n        string paperCid;\r\n    }\r\n\r\n    mapping  (address=>Researcher) profileMapping;\r\n    mapping  (string=>ResearchPaper) paperMapping;\r\n\r\n\r\n\r\n    function newResearcher(string memory theName) public{\r\n        bytes memory temp = bytes(theName);\r\n        require(temp.length>0);\r\n\r\n        profileMapping[msg.sender].name=theName;\r\n        profileMapping[msg.sender].joinDate= block.timestamp;\r\n\r\n    }\r\n    function viewResearcher(address theAddress) public view returns(Researcher memory){\r\n        return profileMapping[theAddress];\r\n    }\r\n\r\n    function msgSenderChecker() public view returns(address){\r\n        return msg.sender;\r\n    }\r\n\r\n    function addPaper(string memory _title, string memory cid) public{\r\n        ResearchPaper memory temp = ResearchPaper({title:_title, uploadDate:block.timestamp, paperCid:cid, theAddress:msg.sender });\r\n        profileMapping[msg.sender].paperCidArray.push(cid);\r\n        paperMapping[cid] = temp;\r\n\r\n    }\r\n\r\n    function viewOnesPapers() public view returns(string[] memory) {\r\n        return profileMapping[msg.sender].paperCidArray;\r\n    }\r\n\r\n\r\n    function getTime() public view returns(uint256) {\r\n        return block.timestamp;\r\n    }\r\n\r\n    \r\n}"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}
