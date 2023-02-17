@@ -25,7 +25,6 @@ const inter = Inter({ subsets: ["latin"] });
 // if (account!=null){
 // }
 export default function Home() {
-  let readViewResearcher;
   const { address, isConnecting, isDisconnected, isConnected } = useAccount();
   useEffect(() => {
   }, []);
@@ -43,20 +42,14 @@ export default function Home() {
   const [alreadyMember, setAlreadyMember] = useState(false);
   const { connect, connectors, isLoading, pendingConnector } = useConnect();
   const [name, setName] = useState("");
-  readViewResearcher = useContractRead({
+  const readViewResearcher = useContractRead({
     address: RESEARCH_CONTRACT_ADDRESS,
     abi: abi,
     functionName: "viewResearcher",
     args: [address],
   });
 
-
-  // const onePaper = useContractRead({
-  //   address:RESEARCH_CONTRACT_ADDRESS,
-  //   abi:abi,
-  //   functionName:"cidToPaper",
-  //   args:["ipfs://QmWywcZkAQsUDxLjH5pezDrPgiEKRG8pKoKPMgTtXx8k1X/Time%20Table.png"]
-  // })
+  
 
   const readOnesPapers = useContractRead({
     address: RESEARCH_CONTRACT_ADDRESS,
@@ -64,16 +57,20 @@ export default function Home() {
     functionName: "viewOnesPapers",
     args: [address],
   });
+
+
   function viewResearcher() {
     console.log(readViewResearcher);
   }
 
-  function viewPaper(){
-    console.log(onePaper.data)
+
+  const anarray = readOnesPapers.data
+  // console.log(anarray)
+
+  for(let i =0; i<anarray.length;i++){
+    console.log(anarray[i])
   }
-  function viewOnesPapers() {
-    console.log(readOnesPapers.data);
-  }
+
   function viewMyAddress() {
     console.log(address);
   }
