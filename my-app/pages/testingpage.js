@@ -10,7 +10,7 @@ export default function Hero(){
     return(
     <div className="hero">
         <span className="font-Michroma">SCHOLAR3</span>
-        <h1 className="font-Inconsolata font-extrabold">Gateway to a thousand worlds!</h1>
+        <h1 className="font-Inconsolata font-black">Gateway to a thousand worlds!</h1>
         <Image src = {girl} alt = "girl reading" className="girl"/>
         <div className="btn">
             <h4 className="font-Michroma">Get Started</h4>

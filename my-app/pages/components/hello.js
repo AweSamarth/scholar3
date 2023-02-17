@@ -1,22 +1,14 @@
 import React from "react";
-import Head from "next/head";
 import Image from "next/image";
-import { Inconsolata } from "@next/font/google";
-import { Michroma } from "@next/font/google";
-import { ConnectButton, midnightTheme, darkTheme } from "@rainbow-me/rainbowkit";
-import { abi, RESEARCH_CONTRACT_ADDRESS } from "../../constants";
-import { Contract, providers, utils } from "ethers";
-import girl from "../../public/girl.png"
-const inc = Inconsolata({ weight:'900', style:'normal' ,subsets: ["latin"]});
-const mich = Michroma({ weight:'400', subsets: ["latin"] })
+
 import book from "../../public/book.svg"
 
 
 export default function Hello(){
     return(
         <div className="hello">
-            <h2>/hello</h2>
-            <div className={"hello-content"} >
+            <h2 className=" font-Inconsolata font-black">/hello</h2>
+            <div className="hello-content font-Michroma " >
                 <div><Image src = {book} className="book" alt="book"/></div>
                 <div>
                     <p>We are a dedicated group of individuals who believe that access to information and education should be available to everyone, and that it should be safe and secure.</p>
