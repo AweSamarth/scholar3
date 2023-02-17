@@ -178,12 +178,9 @@
     flex-direction: row;
     justify-content:center;
     align-items:center;
-#hello{
-  color:black;
-}
-*{
-  /* overflow-x: hidden; */
-}
+  }
+
+
 body{
   margin: 0;
   height: 97.5vh;
@@ -435,3 +432,4 @@ border-radius: 58px 58px 0 0;
   border-radius: 54px;
   margin: auto;
   }
+}
