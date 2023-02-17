@@ -1,20 +1,15 @@
+
 const {ethers, network} = require("hardhat")
 
+
 module.exports = async function ({getNamedAccounts, deployments}){
-    const {deploy, log} = deployments
+    const{deploy, log} = deployments
     const {deployer} = await getNamedAccounts()
-    const chainId = network.config.chainId
-    await deploy("Research", {
+    await deploy("Library",{
         from:deployer,
         args:[],
         log:true
     })
-
-
-
-
-
-
 }
 
-module.exports.tags = ["research", "all"]
+module.exports.tags = ["library", "all"]

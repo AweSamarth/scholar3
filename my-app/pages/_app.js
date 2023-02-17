@@ -1,16 +1,16 @@
-import '@/styles/globals.css'
+import '../styles/globals.css'
 import '@rainbow-me/rainbowkit/styles.css';
+import dynamic from 'next/dynamic'
+
 import {
   getDefaultWallets,
   darkTheme,
   RainbowKitProvider,
 } from '@rainbow-me/rainbowkit';
 import { configureChains, createClient, goerli, WagmiConfig, Chain } from 'wagmi';
-import { mainnet, polygon, optimism, arbitrum } from 'wagmi/chains';
-import { alchemyProvider } from 'wagmi/providers/alchemy';
-import { publicProvider } from 'wagmi/providers/public';
+
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
-import "../styles/login.css"
+import { ThirdwebProvider, ChainId } from '@thirdweb-dev/react';
 
 
 
@@ -40,7 +40,7 @@ export const mantle ={
 
 
 const { chains, provider } = configureChains(
-  [mantle],
+  [mantle, goerli],
   [
     jsonRpcProvider({
       rpc:chain=>({http:chain.rpcUrls.default.http[0]})
@@ -58,14 +58,20 @@ const wagmiClient = createClient({
   connectors,
   provider
 })
+const activeChainId= ChainId.Goerli
 
-export default function App({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   return (
+    <ThirdwebProvider desiredChainId={activeChainId}>
     <WagmiConfig client={wagmiClient}>
     <RainbowKitProvider chains={chains} theme={darkTheme()} modalSize="compact" initialChain={mantle}>
   <Component {...pageProps} />
 
   </RainbowKitProvider>
     </WagmiConfig>
+    </ThirdwebProvider>
   )
 }
+export default dynamic(() => Promise.resolve(App), {
+  ssr: false,
+});
