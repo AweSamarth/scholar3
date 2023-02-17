@@ -50,6 +50,7 @@ export default function Home() {
     args: [address],
   });
 
+  
 
   // const onePaper = useContractRead({
   //   address:RESEARCH_CONTRACT_ADDRESS,
@@ -68,12 +69,14 @@ export default function Home() {
     console.log(readViewResearcher);
   }
 
-  function viewPaper(){
-    console.log(onePaper.data)
+
+  const anarray = readOnesPapers.data
+  // console.log(anarray)
+
+  for(let i =0; i<anarray.length;i++){
+    console.log(anarray[i])
   }
-  function viewOnesPapers() {
-    console.log(readOnesPapers.data);
-  }
+
   function viewMyAddress() {
     console.log(address);
   }

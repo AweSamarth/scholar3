@@ -2,8 +2,9 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { RESEARCH_CONTRACT_ADDRESS, abi } from "../constants";
-import { Contract, providers, utils, BigNumber } from "ethers";
+import { RESEARCH_CONTRACT_ADDRESS, abi, LIBRARY_CONTRACT_ADDRESS, libraryAbi } from "../constants";
+import { Contract, providers, utils, BigNumber, Signer } from "ethers";
+
 import {
   useAccount,
   useProvider,
@@ -14,7 +15,8 @@ import {
   useContractEvent,
   useContract,
   useSwitchNetwork,
-  useNetwork
+  useNetwork,
+  useSigner
 } from "wagmi";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useEffect, useState } from "react";
@@ -22,7 +24,6 @@ import { mantle } from "./_app";
 import { check } from "prettier";
 import { watchContractEvent } from '@wagmi/core'
 import { RESPONSE_LIMIT_DEFAULT } from "next/dist/server/api-utils";
-import {switchNetwork} from "@wagmi/core"
 import { use } from "chai";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -30,32 +31,75 @@ const inter = Inter({ subsets: ["latin"] });
 // }
 
 export default function Home() {
-    const [theChain, setTheChain] = useState()
+    const [theChain, setTheChain] = useState("")
     const { chain } = useNetwork()
-    const { chains, error, pendingChainId, switchNetwork } =
-    useSwitchNetwork()
-    console.log(chains, switchNetwork)
+    const { chains, error, pendingChainId, switchNetwork,  } = useSwitchNetwork()
+    // console.log(chains, switchNetwork)
     console.log(chain)
+    const provider = useProvider()
+    const {data:signer} = useSigner()
+    useEffect(()=>{
+        if(chain){
+            if(chain.id!=5){
+        switchNetwork?.(5)
+            }
+        }
+    },[chains, chain])
 
-
-    let readViewResearcher;
+    
     const { address, isConnecting, isDisconnected, isConnected } = useAccount();
     
-    useContractEvent({
-        address: RESEARCH_CONTRACT_ADDRESS ,
-        abi: abi,
-        eventName: "ProfileCreated",
-        listener(node, label, owner) {
-            console.log(node, label, owner)
-        },
-        chainId: 1,
-    })
+
 
   const [alreadyMember, setAlreadyMember] = useState(false);
   const { connect, connectors, isLoading, pendingConnector } = useConnect();
+
+  const contract = useContract({
+    address:LIBRARY_CONTRACT_ADDRESS,
+    abi: libraryAbi,
+    signerOrProvider:signer||provider
+  })
+
+
+
+  const authorViewer = async()=>{
+  try {
+    const viewAuthor = await contract.viewAuthor(address)
+    console.log(viewAuthor)
     
+  } catch (error) {
+    console.error(error)
+  }
+  }
+
+  const bookViewer = async()=>{
+    const viewBook = await contract.viewBook("randomcid")
+    console.log(viewBook)
+  }
+  
+  const viewMyAddress =()=>{
+    console.log(address)
+  }
+
+  const authorAdder = async() =>{
+    try {
+      const addAuthor = await contract.newAuthor("author")
+      
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
 
+
+  const bookAdder = async()=>{
+    try {
+      const addBook = await contract.addBook("title", "description","cid", "cover", 222, "description")
+      
+    } catch (error) {
+      console.error(error)
+    }
+  }
   return (
     
     <>
@@ -67,7 +111,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="bg-black border-2 border-red-600 h-[100vh] text-white">
-        <div>{"Hello " + readViewResearcher + "!"}</div>
+        <div>{"Hello " + "!"}</div>
 
         <div className="bg-black mt-4 mb-4 ml-4">
           <ConnectButton
@@ -83,24 +127,19 @@ export default function Home() {
         </div>
 
         <div className="font-extralight ml-4">
-          <button
-            className="bg-blue-500 p-2 rounded-sm"
-            onClick={() => newResearcher()}
-          >
-            writer
-          </button>
           <div>Ye mera div hai
             <div>{chain.id!=5?(<div>Please connect your wallet to Ethereum Goerli
 
                 <button onClick={()=>switchNetwork(5)}>Sex button</button>
             </div>):"not sex"}</div>
-          </div>
           <button
-            className="bg-blue-500 ml-3 p-2 rounded-sm"
-            onClick={() => viewResearcher()}
+            className="bg-blue-500 p-2 rounded-sm"
+            onClick={() => authorAdder()}
           >
-            view thing
+            author adder
           </button>
+          </div>
+
           <button
             className="bg-blue-500 ml-3 p-2 rounded-sm"
             onClick={() => viewMyAddress()}
@@ -109,14 +148,24 @@ export default function Home() {
           </button>
           <button
             className="bg-blue-500 ml-3 p-2 rounded-sm"
-            onClick={() => viewOnesPapers()}
+            onClick={() => viewBook()}
           >
-            view papercid
+            view book
           </button>
           <button
             className="bg-blue-500 ml-3 p-2 rounded-sm"
             onClick={()=>viewPaper()}
           >testing
+          </button>
+          <button
+            className="bg-blue-500 ml-3 p-2 rounded-sm"
+            onClick={()=>authorViewer()}
+          >authorviewer
+          </button>
+          <button
+            className="bg-blue-500 ml-3 p-2 rounded-sm"
+            onClick={()=>bookViewer()}
+          >bookviewer
           </button>
         </div>
       </main>
