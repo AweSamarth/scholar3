@@ -1,4 +1,4 @@
-/* .main {
+.main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -275,106 +275,108 @@
   to {
     transform: rotate(0deg);
   } */
-/* } */
+/* }
+*/
+
 .split {
-  height: 100%;
-  width: 50%;
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  padding-top: 20px;
-}
-
-.left {
-  left: 0;
-  background-color:#2F2E41;
-}
-.right {
-  right: 0;
-  background: linear-gradient(-180deg, rgba(255,255,255,0.50) 0%, rgba(0,0,0,0.50) 100%);
-  /* background-color:#e8e5e5; */
-  /* background-image: url("/Background.png"); */
+    height: 100%;
+    width: 50%;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    padding-top: 20px;
+  }
   
-}
-
-.text1{
-  /* position: relative; */
-
-  height: 750px;
-  width: 944px; 
-}
-.loginCard{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin-top: 7%;
-}
-.inputField::placeholder {
-  text-align: center;
-  font-family: 'Martel Sans';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 14px;
-  text-align: center;
-
-color: rgba(0, 0, 0, 0.52);
-}
-.inputField{
-width: 310px;
-height: 34px;
-font-family: 'Martel Sans';
-background: rgb(255, 255, 255);
-border-radius: 9px;
-border: none;
-}
-.vector{
-  margin-top: 10%;
-  margin-left: 10%;
-}
-.heading{
-  font-family: 'Martel Sans';
-font-weight: 800;
-font-size: 25px;
-line-height: 40px;
-}
-.buttonEl1{
-  margin-top: 12%;
-  background: #2F2E41;
-border-radius: 13px;
-  width: 165px;
-height: 45px;
-font-family: 'Martel Sans';
-font-weight: 700;
-font-size: 16px;
-line-height: 13px;
-text-align: center;
-
-color: #FFFFFF;
-}
-.buttonEl1:hover{
-  cursor: pointer;
-  font-size: 17px;
-  line-height: 14px;
-}
-.buttonEl2{
-  margin-top: 12%;
+  .left {
+    left: 0;
+    background-color:#2F2E41;
+  }
+  .right {
+    right: 0;
+    background: linear-gradient(-180deg, rgba(255,255,255,0.50) 0%, rgba(0,0,0,0.50) 100%);
+    background-color:#e8e5e5;
+     
+  }
+  
+  
+  .text1{
+    /* position: relative; */
+  
+    height: 750px;
+    width: 944px; 
+  }
+  .loginCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 7%;
+  }
+  .inputField::placeholder {
+    text-align: center;
+    font-family: 'Martel Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 14px;
+    text-align: center;
+  
+  color: rgba(0, 0, 0, 0.52);
+  }
+  .inputField{
   width: 310px;
-height: 40px;
-background: #2F2E41;
-border-radius: 7px;
+  height: 34px;
   font-family: 'Martel Sans';
-font-weight: 700;
-font-size: 16px;
-line-height: 13px;
-text-align: center;
-border: none;
-color: #FFFFFF;
-}
-.buttonEl2:hover{
-  cursor: pointer;
-  font-size: 17px;
-  line-height: 14px;
-}
+  background: rgb(255, 255, 255);
+  border-radius: 9px;
+  border: none;
+  }
+  .vector{
+    margin-top: 10%;
+    margin-left: 10%;
+  }
+  .heading{
+    font-family: 'Martel Sans';
+  font-weight: 800;
+  font-size: 25px;
+  line-height: 40px;
+  }
+  .buttonEl1{
+    margin-top: 12%;
+    background: #2F2E41;
+  border-radius: 13px;
+    width: 165px;
+  height: 45px;
+  font-family: 'Martel Sans';
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 13px;
+  text-align: center;
+  
+  color: #FFFFFF;
+  }
+  .buttonEl1:hover{
+    cursor: pointer;
+    font-size: 17px;
+    line-height: 14px;
+  }
+  .buttonEl2{
+    margin-top: 12%;
+    width: 310px;
+  height: 40px;
+  background: #2F2E41;
+  border-radius: 7px;
+    font-family: 'Martel Sans';
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 13px;
+  text-align: center;
+  border: none;
+  color: #FFFFFF;
+  }
+  .buttonEl2:hover{
+    cursor: pointer;
+    font-size: 17px;
+    line-height: 14px;
+  }

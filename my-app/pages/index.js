@@ -21,7 +21,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <link href="https://fonts.googleapis.com/css2?family=Martel+Sans&display=swap" rel="stylesheet"></link>
       </Head>
-      <main className={styles.main}>
+      {/* <main className={styles.main}>
         <div className={styles.description}>
           <div className={`${styles["split"]} ${styles["left"]}`}>
             <div className={styles.centered}>
@@ -53,7 +53,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </main>
+      </main> */}
     </>
   );
 }
