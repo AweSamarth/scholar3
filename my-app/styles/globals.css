@@ -433,3 +433,88 @@ border-radius: 58px 58px 0 0;
   margin: auto;
   }
 }
+.rese{
+  background-color: #2F2E41;
+  width: 100%;
+}
+
+.cards-grids{
+  position : relative;
+  width : 1400px;
+  display : flex;
+  align-items : center;
+  justify-content : center;
+  padding : 30px;   
+  display: grid;
+  grid-template: auto auto / repeat(3, 1fr);
+  gap: 40px;
+}
+.auth-img{
+  position : absolute;
+  width : 260px;
+  height : 260px;
+  
+  top : -40%;
+  left: 20px;
+  box-shadow : 0 5px 20px rgba(0,0,0,0.2);
+  z-index : 1;
+}
+.cards-grids .card-el{
+  margin-top: 50%;
+  position: relative;
+  max-width : 300px;
+  height : 215px;  
+  background:linear-gradient(-180deg, rgba(255, 255, 255, 0.5) 0%, rgba(242, 237, 237, 0.811) 100%);
+  /* margin : 30px 10px; */
+  margin-bottom: 10%;
+  margin-left: 25%;
+  padding : 20px 15px;
+  
+  display : flex;
+  flex-direction : column;
+  box-shadow : 0 5px 20px rgba(132, 75, 128, 0.5);
+  transition : 0.3s ease-in-out;
+  border-radius : 15px;
+}
+.cards-grids .card-el:hover {
+  height : 320px;    
+}
+.cards-grids .card-el .se-image{
+  width: 300px;
+  border-radius : 15px;
+}
+.cards-grids .card-el .card-content{
+  position : relative;
+  top : -140px;
+  padding : 10px 15px;
+  color : #111;
+  text-align : center;
+  
+  visibility : hidden;
+  opacity : 0;
+  transition : 0.3s ease-in-out;
+    
+}
+.cards-grids .card-el:hover .card-content{
+  margin-top : 100%;
+  visibility : visible;
+  opacity : 1;
+  transition-delay: 0.2s;
+}
+.nav-com{
+  display: flex;
+  gap: 520px;
+}
+.header-el{
+  color: white;
+  font-weight: bold;
+  padding-top:7px;
+  font-size: 20px;
+  padding-left: 16px;
+}
+.lib-el{
+  color: white;
+  font-weight: bold;
+  font-size: 50px;
+  padding-top:3%;
+}
