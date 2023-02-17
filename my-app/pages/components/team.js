@@ -3,10 +3,6 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inconsolata } from "@next/font/google";
 import { Michroma } from "@next/font/google";
-import styles from "@/styles/Home.module.css";
-import { ConnectButton, midnightTheme, darkTheme } from "@rainbow-me/rainbowkit";
-import { abi, RESEARCH_CONTRACT_ADDRESS } from "@/constants";
-import { Contract, providers, utils } from "ethers";
 import girl from "../../public/girl.png"
 const inc = Inconsolata({ weight:'900', style:'normal' ,subsets: ["latin"]});
 const mich = Michroma({ weight:'400', subsets: ["latin"] })
