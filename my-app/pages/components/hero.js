@@ -1,14 +1,12 @@
 import React from "react";
 import Image from "next/image";
 import Typewriter from "typewriter-effect";
-import Link from "next/link";
 
 import girl from "../../public/girl.svg";
 import { useAccount } from "wagmi";
 import { useConnectModal, ConnectButton } from "@rainbow-me/rainbowkit";
 import { connect, Connector, InjectedConnector } from "@wagmi/core";
 import "@rainbow-me/rainbowkit/styles.css";
-import dynamic from "next/dynamic";
 
 import {
   getDefaultWallets,
@@ -75,7 +73,7 @@ export default function Hero() {
 
   async function connectAndOpenResearch() {
     const result = await connect({
-      connector: new InjectedConnector({ chains }),
+      connector: new InjectedConnector({ chains })
     });
 
     document.location.href = "../research/researchdiscovery";
@@ -90,11 +88,11 @@ export default function Hero() {
       connector: new InjectedConnector({ chains }),
     });
 
-    document.location.href = "../library/librarydiscovery";
+    window.location.url = "../library/librarydiscovery";
   }
 
   function openLibrary(){
-    document.location.href="../library/librarydiscovery"
+    window.location.url ="../library/librarydiscovery"
   }
 
 
@@ -125,7 +123,7 @@ export default function Hero() {
       <div className=" border-red-500 flex justify-evenly mt-4">
         {address ? (
           <div className=" border-blue-500 flex">
-            <button className="research font-Michroma self-center transition-all hover:bg-[#16161f]" onClick={() => openResearch()}>
+            <button className="research font-Michroma self-center transition-all hover:bg-[#16161f] " onClick={() => openResearch()}>
               Research
             </button>
           </div>

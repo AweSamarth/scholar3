@@ -11,8 +11,8 @@
 }
 body {
   margin: 0;
-  height: 100vh;
-  /* overflow-x: hidden; */
+  padding:0;
+  width: 100%;
 }
 .landing {
   padding: 0;
@@ -160,7 +160,6 @@ body {
   margin: 0;
   height: 97.5vh;
   width: 100vw;
-  overflow-x: hidden;
 }
 .landing {
   padding: 0;
@@ -210,7 +209,6 @@ button {
   color: #2f2e41;
 }
 .hello {
-  overflow-y: hidden;
 
   max-width: 99vw;
   height: 100vh;
@@ -288,6 +286,8 @@ button {
   justify-content: center;
   align-items: center;
 }
+
+
 .card {
   width: 20.25rem;
   height: 27.625rem;
@@ -389,9 +389,14 @@ footer {
   width: 100%;
 }
 
+
+
+
+/* gagan*/
+
 .cards-grids{
   position : relative;
-  width : 1400px;
+  width : 100%;
   display : flex;
   align-items : center;
   justify-content : center;
@@ -418,7 +423,7 @@ footer {
   background:linear-gradient(-180deg, rgba(255, 255, 255, 0.5) 0%, rgba(242, 237, 237, 0.811) 100%);
   /* margin : 30px 10px; */
   margin-bottom: 10%;
-  margin-left: 25%;
+  margin-left: 13%;
   padding : 20px 15px;
   
   display : flex;
@@ -451,21 +456,4 @@ footer {
   visibility : visible;
   opacity : 1;
   transition-delay: 0.2s;
-}
-.nav-com{
-  display: flex;
-  gap: 520px;
-}
-.header-el{
-  color: white;
-  font-weight: bold;
-  padding-top:7px;
-  font-size: 20px;
-  padding-left: 16px;
-}
-.lib-el{
-  color: white;
-  font-weight: bold;
-  font-size: 50px;
-  padding-top:3%;
 }

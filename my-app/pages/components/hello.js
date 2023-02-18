@@ -6,7 +6,7 @@ import book from "../../public/book.svg"
 
 export default function Hello(){
     return(
-        <div className="hello">
+        <div className="">
             <h2 className=" font-Inconsolata font-black">/hello</h2>
             <div className="hello-content font-Michroma " >
                 <div><Image src = {book} className="book" alt="book"/></div>

@@ -64,7 +64,7 @@ function App({ Component, pageProps }) {
   return (
     <ThirdwebProvider desiredChainId={activeChainId}>
     <WagmiConfig client={wagmiClient}>
-    <RainbowKitProvider chains={chains} theme={darkTheme( {accentColor:"#4a44af"})} modalSize="compact"  >
+    <RainbowKitProvider chains={chains} theme={darkTheme( {accentColor:"#4a44af"})} modalSize="compact"  initialChain={mantle} >
   <Component {...pageProps} />
 
   </RainbowKitProvider>

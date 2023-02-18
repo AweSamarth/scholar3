@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 export default function ResearchCard(props) {
   return (
-    <div className="card-el">
+    <div className="card-el hover:cursor-pointer">
       <div className="auth-img">
       <Image className="se-image" href = "#" width={100} height={215} alt="some image" src ="/undrawPic.png"></Image>
       </div>
