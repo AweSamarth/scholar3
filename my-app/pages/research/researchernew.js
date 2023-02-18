@@ -76,7 +76,7 @@ export default function Home() {
     abi: researchAbi,
     functionName: "newResearcher",
     args: [name],
-  }).config;
+  }).config;  
   const {write}  =  useContractWrite(newResearcherconfig);
  
   
