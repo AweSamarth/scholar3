@@ -4,6 +4,7 @@ import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "./PriceConverter.sol";
 
 
+error Incorrect__EthAmount();
 
 
 contract Library{
@@ -91,7 +92,7 @@ contract Library{
         return s_priceFeed;
     }
 
-    function viewAllBookCids () public view returns (string [] memory){
+    function viewAllCids () public view returns (string [] memory){
         return allBookCids;
     }
 

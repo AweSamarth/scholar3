@@ -1,0 +1,44 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol": {
+      "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ninterface AggregatorV3Interface {\n  function decimals() external view returns (uint8);\n\n  function description() external view returns (string memory);\n\n  function version() external view returns (uint256);\n\n  function getRoundData(uint80 _roundId)\n    external\n    view\n    returns (\n      uint80 roundId,\n      int256 answer,\n      uint256 startedAt,\n      uint256 updatedAt,\n      uint80 answeredInRound\n    );\n\n  function latestRoundData()\n    external\n    view\n    returns (\n      uint80 roundId,\n      int256 answer,\n      uint256 startedAt,\n      uint256 updatedAt,\n      uint80 answeredInRound\n    );\n}\n"
+    },
+    "contracts/Library.sol": {
+      "content": "//SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.18;\r\nimport \"@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol\";\r\nimport \"./PriceConverter.sol\";\r\n\r\n\r\nerror Incorrect__EthAmount();\r\n\r\n\r\ncontract Library{\r\n    AggregatorV3Interface private s_priceFeed;\r\n\r\n    string [] allCids ;\r\n\r\n    constructor() {\r\n        s_priceFeed = AggregatorV3Interface(0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e);\r\n    }\r\n\r\n    using PriceConverter for uint256;\r\n\r\n    event ProfileCreated(address indexed theAddress, string theName);\r\n    event BookUploaded(address indexed theAddress, string bookCid );\r\n\r\n    struct Author{\r\n        string name;\r\n        uint256 joinDate;\r\n        string[] bookCidArray;\r\n    }\r\n\r\n    struct Book{\r\n        address theAddress;\r\n        string title;\r\n        string description;\r\n        uint256 uploadDate;\r\n        string bookCid;\r\n        string coverCid;\r\n        uint256 priceInEth;\r\n\r\n    }\r\n\r\n    mapping (address=>Author) authorMapping;\r\n    mapping (string=>Book) bookMapping;\r\n\r\n\r\n    function newAuthor(string memory theName) public {\r\n        authorMapping[msg.sender].name= theName;\r\n        authorMapping[msg.sender].joinDate= block.timestamp;\r\n\r\n    }\r\n\r\n    function viewAuthor(address  theAddress) public view returns(Author memory){\r\n        return authorMapping[theAddress];\r\n    }\r\n\r\n    function addBook (string memory _title, string memory cid, string memory cover, uint256 thePrice, string memory theDescription) public {\r\n        uint256 _ethPrice = thePrice.getConversionRate(s_priceFeed);\r\n        Book memory temp = Book({title:_title, uploadDate:block.timestamp, bookCid:cid, theAddress: msg.sender, coverCid:cover, priceInEth:_ethPrice, description:theDescription });\r\n        authorMapping[msg.sender].bookCidArray.push(cid);\r\n        bookMapping[cid] = temp;\r\n        allCids.push(cid);\r\n    }\r\n    function viewBook(string memory cid) public view returns(Book memory){\r\n        return bookMapping[cid];\r\n    }\r\n\r\n    function viewAuthorBooks(address theAddress) public view returns(string[] memory){\r\n        return authorMapping[theAddress].bookCidArray;\r\n    }\r\n\r\n    function getTime() public view returns(uint256){\r\n        return block.timestamp;\r\n    }\r\n\r\n    function ethPriceReturner(uint256 somevalue) public view returns(uint256){\r\n        return somevalue.getConversionRate(s_priceFeed);\r\n    }\r\n\r\n    function buyBook(string memory theCid, uint256 cost) public payable returns(string memory cidLelo){\r\n\r\n        address payable authorAddress = payable(bookMapping[theCid].theAddress);\r\n        if(msg.value<cost){\r\n            revert Incorrect__EthAmount();\r\n        }\r\n        (bool sent, ) = authorAddress.call{value:cost}(\"\");\r\n        require(sent, \"correct amount of ether not sent\");\r\n\r\n        return theCid;\r\n\r\n\r\n    }\r\n        function getPriceFeed() public view returns (AggregatorV3Interface) {\r\n        return s_priceFeed;\r\n    }\r\n\r\n    function viewAllCids () public view returns (string [] memory){\r\n        return allCids;\r\n    }\r\n\r\n    receive() external payable{}\r\n    fallback() external payable{}\r\n\r\n\r\n\r\n\r\n\r\n}\r\n\r\n"
+    },
+    "contracts/PriceConverter.sol": {
+      "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.18;\r\n\r\nimport \"@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol\";\r\n\r\nlibrary PriceConverter {\r\n\r\n\r\n  // function getPrice(AggregatorV3Interface priceFeed)\r\n  //   internal\r\n  //   view\r\n  //   returns (uint256)\r\n  // {\r\n  //   (, int256 answer, , , ) = priceFeed.latestRoundData();\r\n  //   // ETH/USD rate in 18 digit\r\n  //   return uint256(answer * 10000000000);\r\n  // }\r\n  function getPrice(AggregatorV3Interface priceFeed) internal view returns (uint) {\r\n    (, int price,,,) = priceFeed.latestRoundData();\r\n    uint adjust_price = uint(price) * 1e10;\r\n    uint usd = 1*1e18;\r\n    uint rate = (usd * 1e18) / adjust_price;\r\n    return rate;\r\n    }\r\n\r\n  // 1000000000\r\n  // call it get fiatConversionRate, since it assumes something about decimals\r\n  // It wouldn't work for every aggregator\r\n\r\n\r\n\r\n  function getConversionRate(uint256 usdAmount, AggregatorV3Interface priceFeed)\r\n    internal\r\n    view\r\n    returns (uint256)\r\n  {\r\n    uint256 usdPrice = getPrice(priceFeed);\r\n    uint256 usdAmountIntEth = (usdPrice * usdAmount);\r\n    // the actual USD/ETH conversation rate, after adjusting the extra 0s.\r\n    return usdAmountIntEth;\r\n  }\r\n}"
+    },
+    "contracts/Research.sol": {
+      "content": "//SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.18;\r\n\r\ncontract Research{\r\n\r\n    string [] allResearchCids;\r\n\r\n    event ProfileCreated(address indexed theAddress, string theName);\r\n    event PaperUploaded(address indexed theAddress, string  paperCid);\r\n\r\n\r\n    struct Researcher{\r\n        string name;\r\n        uint256 joinDate;\r\n        string[] paperCidArray;\r\n\r\n    }\r\n\r\n    struct ResearchPaper{\r\n        address theAddress;\r\n        string title;\r\n        uint256 uploadDate;\r\n        string paperCid;\r\n    }\r\n\r\n    mapping  (address=>Researcher) profileMapping;\r\n    mapping  (string=>ResearchPaper) paperMapping;\r\n\r\n    function cidToPaper(string memory cid) public view returns(ResearchPaper memory){\r\n        return paperMapping[cid];\r\n        \r\n    }\r\n\r\n\r\n    function newResearcher(string memory theName) public{\r\n        profileMapping[msg.sender].name=theName;\r\n        profileMapping[msg.sender].joinDate= block.timestamp;\r\n\r\n            }\r\n    function viewResearcher(address theAddress) public view returns(Researcher memory){\r\n        return profileMapping[theAddress];\r\n    }\r\n\r\n\r\n    function addPaper(string memory _title, string memory cid) public{\r\n        ResearchPaper memory temp = ResearchPaper({title:_title, uploadDate:block.timestamp, paperCid:cid, theAddress:msg.sender });\r\n        profileMapping[msg.sender].paperCidArray.push(cid);\r\n        paperMapping[cid] = temp;\r\n        allResearchCids.push(cid);\r\n    }\r\n\r\n    function viewOnesPapers(address theAddress) public view returns(string[] memory) {\r\n        return profileMapping[theAddress].paperCidArray;\r\n    }\r\n\r\n\r\n    function getTime() public view returns(uint256) {\r\n        return block.timestamp;\r\n    }\r\n\r\n    function viewAllResearchCids() public view returns(string [] memory){\r\n        return allResearchCids;\r\n    }\r\n\r\n    \r\n}"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}
