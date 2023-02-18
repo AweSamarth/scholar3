@@ -10,7 +10,7 @@ error Incorrect__EthAmount();
 contract Library{
     AggregatorV3Interface private s_priceFeed;
 
-    address [] public allAuthors;
+    address [] allAuthors;
 
     constructor() {
         s_priceFeed = AggregatorV3Interface(0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e);
@@ -94,6 +94,9 @@ contract Library{
         return s_priceFeed;
     }
 
+    function viewAllAuthors () public view returns (address [] memory){
+        return allAuthors;
+    }
 
     receive() external payable{}
     fallback() external payable{}

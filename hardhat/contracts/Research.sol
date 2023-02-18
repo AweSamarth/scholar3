@@ -3,7 +3,7 @@ pragma solidity ^0.8.18;
 
 contract Research{
 
-    address [] public allResearchers;
+    address [] allResearchers;
 
     event ProfileCreated(address indexed theAddress, string theName);
     event PaperUploaded(address indexed theAddress, string  paperCid);
@@ -58,6 +58,10 @@ contract Research{
 
     function getTime() public view returns(uint256) {
         return block.timestamp;
+    }
+
+    function viewAllResearchers() public view returns(address [] memory){
+        return allResearchers;
     }
 
     

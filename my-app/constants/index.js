@@ -58,25 +58,6 @@ export const researchAbi = [
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "allResearchers",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "string",
         "name": "cid",
         "type": "string"
@@ -142,6 +123,19 @@ export const researchAbi = [
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "viewAllResearchers",
+    "outputs": [
+      {
+        "internalType": "address[]",
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -197,9 +191,9 @@ export const researchAbi = [
     "type": "function"
   }
 ]
-export const RESEARCH_CONTRACT_ADDRESS="0xFeCd31e12B14c7fd4ED2Ed786B88fE97b81Bab53"
+export const RESEARCH_CONTRACT_ADDRESS="0x42D9594f0252EBb3Bd8dBC087f8A59f0506E9f63"
 
-export const LIBRARY_CONTRACT_ADDRESS="0xe0c034a8d53ae942039F3F0494cB5227389db0a8"
+export const LIBRARY_CONTRACT_ADDRESS="0x401BD2C77B851777d76CF398048F2427ad36c404"
 
 export const libraryAbi =[
   {
@@ -290,25 +284,6 @@ export const libraryAbi =[
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "allAuthors",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "string",
         "name": "theCid",
         "type": "string"
@@ -386,6 +361,19 @@ export const libraryAbi =[
     "name": "newAuthor",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "viewAllAuthors",
+    "outputs": [
+      {
+        "internalType": "address[]",
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {

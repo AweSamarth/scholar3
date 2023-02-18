@@ -85,6 +85,16 @@ export default function Home() {
     args: [address],
   });
 
+  const readAllAuthors = useContractRead({
+    address:LIBRARY_CONTRACT_ADDRESS,
+    abi:libraryAbi,
+    functionName:"viewAllAuthors"
+  })
+
+  const viewAllAuthors=()=>{
+    console.log(readAllAuthors)
+  }
+
   const bookViewer = async () => {
     try {
       const theAuthor = await contract.viewAuthor(address);
@@ -216,6 +226,12 @@ export default function Home() {
             onClick={() => bookViewer()}
           >
             bookviewer
+          </button>
+          <button
+            className="bg-blue-500 ml-3 p-2 rounded-sm"
+            onClick={() => viewAllAuthors()}
+          >
+            all author viewer
           </button>
         </div>
       </main>
