@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
-import ResearchCard from "./ResearchCard";
-import researchDataLog from "./researchDataLog";
+import ResearchCard from "./components/ResearchCard";
+import researchDataLog from "./data/researchDataLog";
 import React from "react";
 import { Martel } from "@next/font/google";
 import {

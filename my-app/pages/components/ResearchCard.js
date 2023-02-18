@@ -4,7 +4,7 @@ export default function ResearchCard(props) {
   return (
     <div className="card-el">
       <div className="auth-img">
-      <Image className="se-image" href = "#" width={100} height={215} src ="/undrawPic.png"></Image>
+      <Image className="se-image" href = "#" width={100} height={215} alt="some image" src ="/undrawPic.png"></Image>
       </div>
       <div className="card-content">
         <h2 className="title-el">{props.title}</h2>
