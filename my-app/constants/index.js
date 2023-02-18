@@ -1,4 +1,4 @@
-export const researchAbi = [
+export const researchAbi =[
   {
     "anonymous": false,
     "inputs": [
@@ -124,12 +124,12 @@ export const researchAbi = [
   },
   {
     "inputs": [],
-    "name": "viewAllResearchers",
+    "name": "viewAllResearchCids",
     "outputs": [
       {
-        "internalType": "address[]",
+        "internalType": "string[]",
         "name": "",
-        "type": "address[]"
+        "type": "string[]"
       }
     ],
     "stateMutability": "view",
@@ -191,11 +191,11 @@ export const researchAbi = [
     "type": "function"
   }
 ]
-export const RESEARCH_CONTRACT_ADDRESS="0x42D9594f0252EBb3Bd8dBC087f8A59f0506E9f63"
+export const RESEARCH_CONTRACT_ADDRESS="0xDef94e2eaE1A10BaEE9421Bf53594096918Cc931"
 
-export const LIBRARY_CONTRACT_ADDRESS="0x401BD2C77B851777d76CF398048F2427ad36c404"
+export const LIBRARY_CONTRACT_ADDRESS="0x54BdA3c35A4E880eA0B7cBB15D4b52D02F2f4395"
 
-export const libraryAbi =[
+export const libraryAbi = [
   {
     "inputs": [],
     "stateMutability": "nonpayable",
@@ -365,12 +365,12 @@ export const libraryAbi =[
   },
   {
     "inputs": [],
-    "name": "viewAllAuthors",
+    "name": "viewAllCids",
     "outputs": [
       {
-        "internalType": "address[]",
+        "internalType": "string[]",
         "name": "",
-        "type": "address[]"
+        "type": "string[]"
       }
     ],
     "stateMutability": "view",
