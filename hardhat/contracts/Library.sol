@@ -4,13 +4,12 @@ import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "./PriceConverter.sol";
 
 
-error Incorrect__EthAmount();
 
 
 contract Library{
     AggregatorV3Interface private s_priceFeed;
 
-    address [] allAuthors;
+    string [] allBookCids ;
 
     constructor() {
         s_priceFeed = AggregatorV3Interface(0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e);
@@ -45,8 +44,7 @@ contract Library{
     function newAuthor(string memory theName) public {
         authorMapping[msg.sender].name= theName;
         authorMapping[msg.sender].joinDate= block.timestamp;
-        allAuthors.push(msg.sender);
-        emit ProfileCreated(msg.sender, theName);
+
     }
 
     function viewAuthor(address  theAddress) public view returns(Author memory){
@@ -58,8 +56,7 @@ contract Library{
         Book memory temp = Book({title:_title, uploadDate:block.timestamp, bookCid:cid, theAddress: msg.sender, coverCid:cover, priceInEth:_ethPrice, description:theDescription });
         authorMapping[msg.sender].bookCidArray.push(cid);
         bookMapping[cid] = temp;
-        emit BookUploaded(msg.sender, cid);
-
+        allBookCids.push(cid);
     }
     function viewBook(string memory cid) public view returns(Book memory){
         return bookMapping[cid];
@@ -94,8 +91,8 @@ contract Library{
         return s_priceFeed;
     }
 
-    function viewAllAuthors () public view returns (address [] memory){
-        return allAuthors;
+    function viewAllBookCids () public view returns (string [] memory){
+        return allBookCids;
     }
 
     receive() external payable{}

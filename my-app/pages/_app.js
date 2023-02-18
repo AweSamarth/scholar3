@@ -35,7 +35,7 @@ export const mantle ={
   },
   testnet:true
 
-}
+} 
 
 
 
@@ -64,7 +64,7 @@ function App({ Component, pageProps }) {
   return (
     <ThirdwebProvider desiredChainId={activeChainId}>
     <WagmiConfig client={wagmiClient}>
-    <RainbowKitProvider chains={chains} theme={darkTheme()} modalSize="compact" initialChain={mantle}>
+    <RainbowKitProvider chains={chains} theme={darkTheme( {accentColor:"#4a44af"})} modalSize="compact"  >
   <Component {...pageProps} />
 
   </RainbowKitProvider>
