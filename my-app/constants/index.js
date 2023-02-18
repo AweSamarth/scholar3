@@ -1,4 +1,4 @@
-export const abi = [
+export const researchAbi = [
   {
     "anonymous": false,
     "inputs": [
@@ -38,19 +38,6 @@ export const abi = [
     "type": "event"
   },
   {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "theAddress",
-        "type": "address"
-      }
-    ],
-    "name": "ViewedLmao",
-    "type": "event"
-  },
-  {
     "inputs": [
       {
         "internalType": "string",
@@ -66,6 +53,25 @@ export const abi = [
     "name": "addPaper",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "allResearchers",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -106,7 +112,7 @@ export const abi = [
         "type": "tuple"
       }
     ],
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -191,9 +197,9 @@ export const abi = [
     "type": "function"
   }
 ]
-export const RESEARCH_CONTRACT_ADDRESS="0xA81F6E414C18494BeeB87ec9DEf27cD2497d5927"
+export const RESEARCH_CONTRACT_ADDRESS="0xFeCd31e12B14c7fd4ED2Ed786B88fE97b81Bab53"
 
-export const LIBRARY_CONTRACT_ADDRESS="0x3f519518f4921372E652554599f01EEF28D97AF1"
+export const LIBRARY_CONTRACT_ADDRESS="0xe0c034a8d53ae942039F3F0494cB5227389db0a8"
 
 export const libraryAbi =[
   {
@@ -279,6 +285,25 @@ export const libraryAbi =[
     "name": "addBook",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "allAuthors",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {

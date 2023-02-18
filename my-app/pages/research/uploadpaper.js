@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useAccount } from "wagmi";
 import { usePrepareContractWrite, useContractWrite } from "wagmi";
-import { abi, RESEARCH_CONTRACT_ADDRESS } from "../constants";
+import { abi, RESEARCH_CONTRACT_ADDRESS } from "../../constants";
 import { watchContractEvent } from '@wagmi/core'
 
 

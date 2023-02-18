@@ -3,6 +3,8 @@ pragma solidity ^0.8.18;
 
 contract Research{
 
+    address [] public allResearchers;
+
     event ProfileCreated(address indexed theAddress, string theName);
     event PaperUploaded(address indexed theAddress, string  paperCid);
 
@@ -33,6 +35,7 @@ contract Research{
     function newResearcher(string memory theName) public{
         profileMapping[msg.sender].name=theName;
         profileMapping[msg.sender].joinDate= block.timestamp;
+        allResearchers.push(msg.sender);
         emit ProfileCreated(msg.sender, theName);
     }
     function viewResearcher(address theAddress) public view returns(Researcher memory){
