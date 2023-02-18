@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { RESEARCH_CONTRACT_ADDRESS, abi } from "../constants";
+import { RESEARCH_CONTRACT_ADDRESS, researchAbi } from "../../constants";
 import { Contract, providers, utils, BigNumber } from "ethers";
 import {
   useAccount,
@@ -13,82 +13,73 @@ import {
   useContractWrite,
   useContractEvent
 } from "wagmi";
-import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useEffect, useState } from "react";
-import { mantle } from "./_app";
+import { mantle } from "../_app";
 import { check } from "prettier";
-import { useContract } from "@thirdweb-dev/react";
-import { watchContractEvent } from '@wagmi/core'
-import { RESPONSE_LIMIT_DEFAULT } from "next/dist/server/api-utils";
-
 const inter = Inter({ subsets: ["latin"] });
 // if (account!=null){
 // }
 export default function Home() {
-  const { address, isConnecting, isDisconnected, isConnected } = useAccount();
-  useEffect(() => {
-  }, []);
+  let readViewResearcher
+  useEffect(()=>{
 
+  }, [])
   useContractEvent({
     address: RESEARCH_CONTRACT_ADDRESS ,
-    abi: abi,
+    abi: researchAbi,
     eventName: "ProfileCreated",
     listener(node, label, owner) {
       console.log(node, label, owner)
     },
-    chainId: 1,
   })
-
   const [alreadyMember, setAlreadyMember] = useState(false);
+  const { address, isConnecting, isDisconnected, isConnected } = useAccount();
   const { connect, connectors, isLoading, pendingConnector } = useConnect();
-  const [name, setName] = useState("");
-  const readViewResearcher = useContractRead({
+  const [name, setName] = useState("")
+  readViewResearcher = useContractRead({
     address: RESEARCH_CONTRACT_ADDRESS,
-    abi: abi,
+    abi: researchAbi,
     functionName: "viewResearcher",
-    args: [address],
+    args:[address]
   });
-
-  
 
   const readOnesPapers = useContractRead({
-    address: RESEARCH_CONTRACT_ADDRESS,
-    abi: abi,
-    functionName: "viewOnesPapers",
-    args: [address],
-  });
+    address:RESEARCH_CONTRACT_ADDRESS,
+    abi: researchAbi,
+    functionName:"viewOnesPapers",
+    args:[address]
+  })
 
 
-  function viewResearcher() {
-    console.log(readViewResearcher);
+  function viewResearcher(){
+    console.log(readViewResearcher.data)
   }
 
-
-  const anarray = readOnesPapers.data
-  // console.log(anarray)
-
-  for(let i =0; i<anarray.length;i++){
-    console.log(anarray[i])
+  function viewPaper(){
+    console.log()
   }
 
-  function viewMyAddress() {
-    console.log(address);
+  function viewOnesPapers(){
+    console.log(readOnesPapers.data)
   }
-
-  function nameChange(event) {
-    setName(event.target.value);
+  function viewMyAddress(){
+    console.log(address)
   }
-  function anotherChecker(){
-    console.log(cidToPaper)
+  
+   function nameChange(event){
+     setName(event.target.value)
   }
+  
 
   const newResearcherconfig = usePrepareContractWrite({
     address: RESEARCH_CONTRACT_ADDRESS,
-    abi: abi,
+    abi: researchAbi,
     functionName: "newResearcher",
     args: [name],
   }).config;
-  const newResearcher = useContractWrite(newResearcherconfig).write;
+  const {write}  =  useContractWrite(newResearcherconfig);
+ 
+  
 
   // console.log(contractHua);
 
@@ -101,8 +92,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="bg-black border-2 border-red-600 h-[100vh] text-white">
-        <div>{"Hello " + readViewResearcher + "!"}</div>
-
         <div className="bg-black mt-4 mb-4 ml-4">
           <ConnectButton
             accountStatus={{
@@ -114,12 +103,14 @@ export default function Home() {
               largeScreen: true,
             }}
           />
+
         </div>
 
         <div className="font-extralight ml-4">
+          <input type="text" value={name} onChange={nameChange} className=" bg-gray-800 rounded-md h-8 mr-4 select-none outline-none pl-2"/>
           <button
             className="bg-blue-500 p-2 rounded-sm"
-            onClick={() => newResearcher()}
+            onClick={()=>write()}
           >
             writer
           </button>
@@ -140,11 +131,6 @@ export default function Home() {
             onClick={() => viewOnesPapers()}
           >
             view papercid
-          </button>
-          <button
-            className="bg-blue-500 ml-3 p-2 rounded-sm"
-            onClick={()=>viewPaper()}
-          >testing
           </button>
         </div>
       </main>

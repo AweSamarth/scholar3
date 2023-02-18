@@ -6,6 +6,10 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily:{
+      "Michroma":["Michroma", "sans-serif"],
+      "Inconsolata":["Inconsolata", "sans-serif"]
+    },
     extend: {},
   },
   plugins: [],

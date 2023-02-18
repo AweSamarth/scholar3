@@ -2,8 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { RESEARCH_CONTRACT_ADDRESS, abi } from "../constants";
-import { Contract, providers, utils, BigNumber } from "ethers";
+import { RESEARCH_CONTRACT_ADDRESS, researchAbi } from "../constants";
 import {
   useAccount,
   useProvider,
@@ -24,47 +23,26 @@ export default function Home() {
   useEffect(()=>{
 
   }, [])
-  useContractEvent({
-    address: RESEARCH_CONTRACT_ADDRESS ,
-    abi: abi,
-    eventName: "ProfileCreated",
-    listener(node, label, owner) {
-      console.log(node, label, owner)
-    },
-  })
+
   const [alreadyMember, setAlreadyMember] = useState(false);
   const { address, isConnecting, isDisconnected, isConnected } = useAccount();
   const { connect, connectors, isLoading, pendingConnector } = useConnect();
   const [name, setName] = useState("")
   readViewResearcher = useContractRead({
     address: RESEARCH_CONTRACT_ADDRESS,
-    abi: abi,
+    abi: researchAbi,
     functionName: "viewResearcher",
     args:[address]
   });
 
   const readOnesPapers = useContractRead({
     address:RESEARCH_CONTRACT_ADDRESS,
-    abi:abi,
+    abi: researchAbi,
     functionName:"viewOnesPapers",
     args:[address]
   })
 
 
-  function viewResearcher(){
-    console.log(readViewResearcher.data)
-  }
-
-  function viewPaper(){
-    console.log()
-  }
-
-  function viewOnesPapers(){
-    console.log(readOnesPapers.data)
-  }
-  function viewMyAddress(){
-    console.log(address)
-  }
   
    function nameChange(event){
      setName(event.target.value)
@@ -73,11 +51,11 @@ export default function Home() {
 
   const newResearcherconfig = usePrepareContractWrite({
     address: RESEARCH_CONTRACT_ADDRESS,
-    abi: abi,
+    abi: researchAbi,
     functionName: "newResearcher",
     args: [name],
   }).config;
-  const newResearcher  =  useContractWrite(newResearcherconfig).write;
+  const {write}  =  useContractWrite(newResearcherconfig);
  
   
 
@@ -110,7 +88,7 @@ export default function Home() {
           <input type="text" value={name} onChange={nameChange} className=" bg-gray-800 rounded-md h-8 mr-4 select-none outline-none pl-2"/>
           <button
             className="bg-blue-500 p-2 rounded-sm"
-            onClick={()=>newResearcher()}
+            onClick={()=>write()}
           >
             writer
           </button>
