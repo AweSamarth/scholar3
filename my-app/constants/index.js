@@ -1,4 +1,4 @@
-export const abi = [
+export const researchAbi = [
   {
     "anonymous": false,
     "inputs": [
@@ -35,19 +35,6 @@ export const abi = [
       }
     ],
     "name": "ProfileCreated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "theAddress",
-        "type": "address"
-      }
-    ],
-    "name": "ViewedLmao",
     "type": "event"
   },
   {
@@ -106,7 +93,7 @@ export const abi = [
         "type": "tuple"
       }
     ],
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -133,6 +120,19 @@ export const abi = [
     "name": "newResearcher",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "viewAllResearchers",
+    "outputs": [
+      {
+        "internalType": "address[]",
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -191,9 +191,9 @@ export const abi = [
     "type": "function"
   }
 ]
-export const RESEARCH_CONTRACT_ADDRESS="0xA81F6E414C18494BeeB87ec9DEf27cD2497d5927"
+export const RESEARCH_CONTRACT_ADDRESS="0x42D9594f0252EBb3Bd8dBC087f8A59f0506E9f63"
 
-export const LIBRARY_CONTRACT_ADDRESS="0x3f519518f4921372E652554599f01EEF28D97AF1"
+export const LIBRARY_CONTRACT_ADDRESS="0x401BD2C77B851777d76CF398048F2427ad36c404"
 
 export const libraryAbi =[
   {
@@ -361,6 +361,19 @@ export const libraryAbi =[
     "name": "newAuthor",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "viewAllAuthors",
+    "outputs": [
+      {
+        "internalType": "address[]",
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {

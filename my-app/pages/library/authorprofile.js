@@ -2,8 +2,8 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { RESEARCH_CONTRACT_ADDRESS, abi, LIBRARY_CONTRACT_ADDRESS, libraryAbi } from "../constants";
-import { Contract, providers, utils, BigNumber, Signer } from "ethers";
+import { RESEARCH_CONTRACT_ADDRESS, abi, LIBRARY_CONTRACT_ADDRESS, libraryAbi } from "../../constants";
+import { Contract, providers, utils, BigNumber, Signer, ethers } from "ethers";
 
 import {
   useAccount,
@@ -20,7 +20,7 @@ import {
 } from "wagmi";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useEffect, useState } from "react";
-import { mantle } from "./_app";
+import { mantle } from "../_app";
 import { check } from "prettier";
 import { watchContractEvent } from '@wagmi/core'
 import { RESPONSE_LIMIT_DEFAULT } from "next/dist/server/api-utils";
@@ -62,6 +62,7 @@ export default function Home() {
 
 
 
+
   const authorViewer = async()=>{
   try {
     const viewAuthor = await contract.viewAuthor(address)
@@ -71,20 +72,14 @@ export default function Home() {
     console.error(error)
   }
   }
-
-  const bookViewer = useContractRead({
-    address:LIBRARY_CONTRACT_ADDRESS,
-    abi:libraryAbi,
-    functionName:"viewBook",
-    args:[""]
-  })
-
-
-
+  
+  
+  
+  
   const viewMyAddress =()=>{
     console.log(address)
   }
-
+  
   const readOnesBooks= useContractRead({
     address:LIBRARY_CONTRACT_ADDRESS,
     abi:libraryAbi,
@@ -92,6 +87,25 @@ export default function Home() {
     args:[address]
   })
 
+
+
+  const bookViewer = async()=>{
+    try {
+      const theAuthor = await contract.viewAuthor(address)
+      const theCid = theAuthor.bookCidArray
+      console.log(theCid)
+      const theBook = await contract.viewBook(theCid)
+      console.log(theBook)
+      const thePrice = ethers.utils.formatEther(theBook.priceInEth)
+      console.log(thePrice)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+
+  
+  
   const viewOnesBooks = ()=>{
     console.log(readOnesBooks.data)
   }

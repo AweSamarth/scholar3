@@ -1,27 +1,22 @@
 import React from "react";
-import Head from "next/head";
 import Image from "next/image";
-import { Inconsolata } from "@next/font/google";
-import { Michroma } from "@next/font/google";
-import { ConnectButton, midnightTheme, darkTheme } from "@rainbow-me/rainbowkit";
-import { abi, RESEARCH_CONTRACT_ADDRESS } from "../../constants";
-import { Contract, providers, utils } from "ethers";
+
+
 import girl from "../../public/girl.svg"
-const inc = Inconsolata({ weight:'900', style:'normal' ,subsets: ["latin"]});
-const mich = Michroma({ weight:'400', subsets: ["latin"] })
+
 
 export default function Hero(){
 
     return(
-    <div className="hero">
-        <span className={mich.className}>SCHOLAR3</span>
-        <h1 className={inc.className}>Gateway to a thousand worlds!</h1>
+    <div className="hero flex flex-col flex-wrap padding-[1rem] w-[100%] h-[100%] px-12 bg-[url('../public/Background.png')]  ">
+        <span className="font-Michroma text-xl mt-4">SCHOLAR3</span>
+        <h1 className="font-Inconsolata font-extrabold text-[#2F2E41] text-center text-[6.5em] tracking-[1px] leading-[7rem] ">Gateway to a thousand worlds!</h1>
         <Image src = {girl} alt = "girl reading" className="girl"/>
         <div className="btn">
-            <h4 className={mich.className}>Get Started</h4>
+            <h4 className="font-Michroma">Get Started</h4>
             <div className="btn2">
-            <button className="research"{...mich.className} >Research</button>
-            <button className="library" {...mich.className}>Library</button>
+            <button className="research font-Michroma" >Research</button>
+            <button className="library font-Michroma">Library</button>
             </div>
         </div>
     </div>
