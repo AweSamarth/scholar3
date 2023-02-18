@@ -10,7 +10,6 @@ import Team from "./components/team";
 import Footer from "./components/footer";
 const inter = Inter({ subsets: ["latin"] });
 
-
 export default function Home() {
   return (
     
