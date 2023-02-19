@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
+import Link from "next/link";
 import {
   ConnectButton,
   midnightTheme,
@@ -26,7 +27,7 @@ export default function Home() {
         <div className = "h-[100%] w-[35%] z-10 top-0 pt-[20px] flex justify-center absolute left-0 bg-[#2F2E41]"> 
           <div >
             <div>
-          <p className="text-[20px] ml-4 text-white font-Michroma h-0 mt-2 mb-[25%]">SCHOLAR3</p>
+          <Link href="/"><p className="text-[20px] ml-4 text-white font-Michroma h-0 mt-2 mb-[25%]">SCHOLAR3</p></Link>
           </div>
           <div >
               <Image
