@@ -8,7 +8,8 @@ module.exports = {
   theme: {
     fontFamily:{
       "Michroma":["Michroma", "sans-serif"],
-      "Inconsolata":["Inconsolata", "sans-serif"]
+      "Inconsolata":["Inconsolata", "sans-serif"],
+      "Popins":["Poppins","sans-serif"]
     },
     extend: {},
   },

@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:ital,wght@0,300;0,700;1,300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Michroma&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -394,7 +395,7 @@ footer {
 
 /* gagan*/
 
-.cards-grids{
+/* .cards-grids{
   position : relative;
   width : 100%;
   display : flex;
@@ -405,7 +406,7 @@ footer {
   grid-template: auto auto / repeat(3, 1fr);
   gap: 40px;
 }
-.auth-img{
+/* .auth-img{
   position : absolute;
   width : 260px;
   height : 260px;
@@ -414,14 +415,14 @@ footer {
   left: 20px;
   box-shadow : 0 5px 20px rgba(0,0,0,0.2);
   z-index : 1;
-}
-.cards-grids .card-el{
+} */
+/* .cards-grids .card-el{
   margin-top: 50%;
   position: relative;
   max-width : 300px;
   height : 215px;  
   background:linear-gradient(-180deg, rgba(255, 255, 255, 0.5) 0%, rgba(242, 237, 237, 0.811) 100%);
-  /* margin : 30px 10px; */
+  /* margin : 30px 10px; 
   margin-bottom: 10%;
   margin-left: 13%;
   padding : 20px 15px;
@@ -457,3 +458,39 @@ footer {
   opacity : 1;
   transition-delay: 0.2s;
 }
+.cards-container{
+  display: flex;
+
+}  */
+
+/* Style for Research cards page */
+/* .card-container{
+  display:flex;
+  flex-direction: row;
+  /* flex-flow: column; 
+  margin-top:5%;
+  margin-left: 25.5%;
+} */
+/* .left-side{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-flow: row;
+} */
+/* .column{
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+} */
+/* .put-img{
+  background-color: #808080;
+  height: 100px;
+  width: 100px;
+} */
+/* .column2-content{
+  background-color: #008000;
+  height: 100px;
+  width:700px;
+  padding-left: 20px;
+} */
