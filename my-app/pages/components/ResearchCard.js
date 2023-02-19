@@ -11,7 +11,7 @@ export default function ResearchCard(props) {
           </div>
         </div>
         <div className="flex flex-col flex-1 ">
-          <div className="bg-[#808080] h-fit w-[700px] pl-[20px] rounded-tr-lg">
+          <div className="bg-[#b3b3b3] h-fit w-[700px] pl-[20px] rounded-tr-lg">
             <h2 className=" pl-[15px] text-[40px] font-Michroma font-[500]">{props.title}</h2>
             <p className=" pl-[20px] text-[22px] font-[400] font-Inconsolata">{`Author: ${props.researcherName}`}</p>
             <p className="flex justify-end pr-[3px] font-[700] font-Inconsolata">{`D.O.P: ${props.dop}`}</p>
