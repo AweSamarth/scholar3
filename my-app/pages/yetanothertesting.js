@@ -1,5 +1,5 @@
 import { useNetwork, useSwitchNetwork } from 'wagmi'
- 
+import {TailSpin} from "react-loader-spinner"
 export default function App() {
   const { chain } = useNetwork()
   const { chains, error, isLoading, pendingChainId, switchNetwork } =
@@ -7,20 +7,16 @@ export default function App() {
     
   return (
     <>
-      {chain && <div>Connected to {chain.name}</div>}
- 
-      {chains.map((x) => (
-        <button
-          disabled={!switchNetwork || x.id === chain?.id}
-          key={x.id}
-          onClick={() => switchNetwork?.(x.id)}
-        >
-          {x.name}
-          {isLoading && pendingChainId === x.id && ' (switching)'}
-        </button>
-      ))}
- 
-      <div>{error && error.message}</div>
-    </>
+<TailSpin
+  height="80"
+  width="80"
+  color="#c3bfc4"
+  ariaLabel="tail-spin-loading"
+  radius="1"
+  wrapperStyle={{}}
+  wrapperClass=""
+  visible={true}
+/>    
+      </>
   )
 }
