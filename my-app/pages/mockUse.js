@@ -14,7 +14,7 @@ import { abi, RESEARCH_CONTRACT_ADDRESS } from "../constants";
 import { Contract, providers, utils } from "ethers";
 import Link from "next/link";
 
-export default function Research() {
+export default function UserProfile() {
   const content = mockData.map((item) => {
     return <LibraryCard key={item.id} {...item} />;
   });
