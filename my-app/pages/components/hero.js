@@ -88,11 +88,11 @@ export default function Hero() {
       connector: new InjectedConnector({ chains }),
     });
 
-    window.location.url = "../library/librarydiscovery";
+    document.location.href = "../library/librarydiscovery";
   }
 
   function openLibrary(){
-    window.location.url ="../library/librarydiscovery"
+    document.location.href ="../library/librarydiscovery"
   }
 
 
