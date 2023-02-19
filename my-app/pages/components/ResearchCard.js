@@ -21,7 +21,7 @@ export default function ResearchCard(props) {
             ></Image>
           </div>
         </div>
-        <div className="flex flex-col flex-1 ">
+        <div className="flex flex-col flex-1 shadow-[10px_10px]">
           <div className="bg-[#808080] h-fit w-[700px] pl-[20px] rounded-tr-lg">
             <h2 className=" pl-[15px] text-[40px] font-Michroma font-[500]">
               {props.title}
