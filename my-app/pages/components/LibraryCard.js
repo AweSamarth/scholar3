@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
-export default function ResearchCard(props) {
+
+
+export default function LibraryCard(props) {
   return (
     <div className="card-el hover:cursor-pointer">
       <div className="auth-img">
