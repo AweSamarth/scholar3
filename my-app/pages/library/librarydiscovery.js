@@ -48,21 +48,24 @@ export default function Research() {
         const allBooks = await contract.viewAllCids();
         if (allBooks.length > 0) {
           for (let i = 0; i < allBooks.length; i++) {
-            const oneBook = await contract.cidToPaper(allBooks[i]);
+            const oneBook = await contract.viewBook(allBooks[i]);
             console.log(oneBook);
             //this gives an object which has the researcher's address, title of the paper, upload date and paper cid
             const libraryAuthorObj = await contract.viewAuthor(
               oneBook.theAddress
+
             );
+            console.log(libraryAuthorObj)
             const libraryAuthorName = libraryAuthorObj.name;
+            console.log(libraryAuthorName)
             const date = oneBook.uploadDate._hex;
             const title = oneBook.title;
-            const id = oneBook.paperCid.slice(7);
+            const id = oneBook.bookCid.slice(7);
             console.log(id);
             const obj = {
               id: id,
               title: title,
-              researcherName: researcherName,
+              authorName: libraryAuthorName,
               dop: date,
             };
             temparr.push(obj);
@@ -121,10 +124,11 @@ export default function Research() {
 
   const uploadClicked = async () => {
     try {
-      const theResearcher = await contract.viewAuthor(address);
-      const bookCid = theResearcher.paperCidArray;
+      const theAuthor = await contract.viewAuthor(address);
+      console.log(theAuthor)
+      const bookCid = theAuthor.bookCidArray;
       console.log(bookCid);
-      if (bookCid==undefined||bookCid.length == 0) {
+      if (theAuthor.name=="") {
         console.log("this ran");
         document.location.href = "./libraryauthornew";
       } else {
