@@ -10,7 +10,7 @@ import {
   midnightTheme,
   darkTheme,
 } from "@rainbow-me/rainbowkit";
-import { abi, libraryAbi, LIBRARY_CONTRACT_ADDRESS, researchAbi, RESEARCH_CONTRACT_ADDRESS } from "../../constants";
+import { abi, researchAbi, RESEARCH_CONTRACT_ADDRESS, libraryAbi, LIBRARY_CONTRACT_ADDRESS } from "../../constants";
 import { Contract, providers, utils } from "ethers";
 import Link from "next/link";
 import {
@@ -45,19 +45,19 @@ export default function Research() {
       setLoading(true);
       let temparr = [];
       try {
-        const allPapers = await contract.viewAllResearchCids();
-        if (allPapers.length > 0) {
-          for (let i = 0; i < allPapers.length; i++) {
-            const onePaper = await contract.cidToPaper(allPapers[i]);
-            console.log(onePaper);
+        const allBooks = await contract.viewAllCids();
+        if (allBooks.length > 0) {
+          for (let i = 0; i < allBooks.length; i++) {
+            const oneBook = await contract.cidToPaper(allBooks[i]);
+            console.log(oneBook);
             //this gives an object which has the researcher's address, title of the paper, upload date and paper cid
-            const researcherObj = await contract.viewResearcher(
-              onePaper.theAddress
+            const libraryAuthorObj = await contract.viewAuthor(
+              oneBook.theAddress
             );
-            const researcherName = researcherObj.name;
-            const date = onePaper.uploadDate._hex;
-            const title = onePaper.title;
-            const id = onePaper.paperCid.slice(7);
+            const libraryAuthorName = libraryAuthorObj.name;
+            const date = oneBook.uploadDate._hex;
+            const title = oneBook.title;
+            const id = oneBook.paperCid.slice(7);
             console.log(id);
             const obj = {
               id: id,
@@ -71,7 +71,8 @@ export default function Research() {
           setArrayOfCards(temparr);
           setLoading(false);
         } else {
-          console.log(0);
+          console.log("No Books found");
+
         }
       } catch (error) {
         console.error(error);
@@ -79,7 +80,7 @@ export default function Research() {
     }
 
     getAllPapers();
-  }, []);
+  }, [chains, chain]);
 
   const provider = useProvider();
   const { data: signer } = useSigner();
@@ -103,15 +104,15 @@ export default function Research() {
   });
   const profileClicked = async () => {
     try {
-      const theAuthor = await contract.viewResearcher(address);
+      const theAuthor = await contract.viewAuthor(address);
       const theAuthorName = theAuthor.name;
       console.log(theAuthorName);
       if (theAuthorName == "") {
         console.log("this ran");
-        document.location.href = "./researchernew";
+        document.location.href = "./libraryauthornew";
       } else {
         console.log("that ran");
-        document.location.href = "./researcherprofile";
+        document.location.href = "./libraryauthorprofile";
       }
     } catch (error) {
       console.error(error);
@@ -120,15 +121,15 @@ export default function Research() {
 
   const uploadClicked = async () => {
     try {
-      const theResearcher = await contract.viewResearcher(address);
+      const theResearcher = await contract.viewAuthor(address);
       const bookCid = theResearcher.paperCidArray;
       console.log(bookCid);
-      if (bookCid.length == 0) {
+      if (bookCid==undefined||bookCid.length == 0) {
         console.log("this ran");
-        document.location.href = "./researchernew";
+        document.location.href = "./libraryauthornew";
       } else {
         console.log("that ran");
-        document.location.href = "./researchpaperupload";
+        document.location.href = "./librarybookupload";
       }
     } catch (error) {
       console.error(error);
@@ -166,7 +167,7 @@ export default function Research() {
                 className="bg-[#5a55bf] hover:bg-[#444093] text-white px-4 py-2 m-1 rounded transition-all "
                 onClick={uploadClicked}
               >
-                Upload a paper
+                Upload a book
               </button>
             </div>
             <div className=" mt-1">
@@ -177,7 +178,7 @@ export default function Research() {
 
         <div className=" text-center">
           <h2 className="lib-el font-Inconsolata tracking-wide text-[#6862e3] text-[2.5em] font-black">
-            Browse all Research Papers
+            Browse all Books
           </h2>
         </div>
         {loading ? (
