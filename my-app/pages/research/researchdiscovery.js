@@ -121,9 +121,8 @@ export default function Research() {
   const uploadClicked = async () => {
     try {
       const theResearcher = await contract.viewResearcher(address);
-      const bookCid = theResearcher.paperCidArray;
-      console.log(bookCid);
-      if (bookCid.length == 0) {
+      console.log(theResearcher.name);
+      if (theResearcher.name=="") {
         console.log("this ran");
         document.location.href = "./researchernew";
       } else {

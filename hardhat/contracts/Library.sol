@@ -42,6 +42,8 @@ contract Library{
     mapping (string=>Book) bookMapping;
 
 
+
+
     function newAuthor(string memory theName) public {
         authorMapping[msg.sender].name= theName;
         authorMapping[msg.sender].joinDate= block.timestamp;
@@ -67,9 +69,7 @@ contract Library{
         return authorMapping[theAddress].bookCidArray;
     }
 
-    function getTime() public view returns(uint256){
-        return block.timestamp;
-    }
+
 
     function ethPriceReturner(uint256 somevalue) public view returns(uint256){
         return somevalue.getConversionRate(s_priceFeed);

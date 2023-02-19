@@ -1,4 +1,4 @@
-export const researchAbi =[
+export const researchAbi = [
   {
     "anonymous": false,
     "inputs": [
@@ -97,19 +97,6 @@ export const researchAbi =[
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "getTime",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "string",
@@ -191,9 +178,9 @@ export const researchAbi =[
     "type": "function"
   }
 ]
-export const RESEARCH_CONTRACT_ADDRESS="0xDef94e2eaE1A10BaEE9421Bf53594096918Cc931"
+export const RESEARCH_CONTRACT_ADDRESS="0xddab99b21E11D1A2DF42303Edd0BFaad648D0f52"
 
-export const LIBRARY_CONTRACT_ADDRESS="0x54BdA3c35A4E880eA0B7cBB15D4b52D02F2f4395"
+export const LIBRARY_CONTRACT_ADDRESS="0xB1f6ee6e58bE9ADd89A10b5426570Dbb8215a711"
 
 export const libraryAbi = [
   {
@@ -332,19 +319,6 @@ export const libraryAbi = [
         "internalType": "contract AggregatorV3Interface",
         "name": "",
         "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getTime",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
       }
     ],
     "stateMutability": "view",
