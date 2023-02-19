@@ -3,35 +3,81 @@ import Image from "next/image";
 import ResearchCard from "../components/ResearchCard";
 import researchDataLog from "../data/researchDataLog";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   ConnectButton,
   midnightTheme,
   darkTheme,
 } from "@rainbow-me/rainbowkit";
-import { abi, RESEARCH_CONTRACT_ADDRESS } from "../../constants";
+import { abi, researchAbi, RESEARCH_CONTRACT_ADDRESS } from "../../constants";
 import { Contract, providers, utils } from "ethers";
 import Link from "next/link";
-import { useNetwork, useSwitchNetwork } from "wagmi";
+import { useAccount, useContract, useNetwork, useProvider, useSigner, useSwitchNetwork } from "wagmi";
 
 export default function Research() {
-  const [state, setState] = useState(0)
-  const { chain } = useNetwork()
-  const { chains, error, pendingChainId, switchNetwork,  } = useSwitchNetwork()
-  useEffect(()=>{
-    
-    if(chain){
-      console.log(chain)
-        if(chain.id!=5){
-          console.log("huh")
-    switchNetwork?.(5)
-    setState(1)
-        }
+  const { address, isConnecting, isDisconnected, isConnected } = useAccount();
+
+  const [state, setState] = useState(0);
+  const { chain } = useNetwork();
+  const { chains, error, pendingChainId, switchNetwork } = useSwitchNetwork();
+  useEffect(() => {
+    if (chain) {
+      console.log(chain);
+      if (chain.id != 5001) {
+        console.log("huh");
+        switchNetwork?.(5001);
+        setState(1);
+      }
     }
-},[chains, chain])
+  }, [chains, chain]);
+  const provider = useProvider()
+  const {data:signer} = useSigner()
+  const contract = useContract({
+    address:RESEARCH_CONTRACT_ADDRESS,
+    abi: researchAbi,
+    signerOrProvider: signer || provider
+  })
+
   const content = researchDataLog.map((item) => {
     return <ResearchCard key={item.id} {...item} />;
   });
+  const profileClicked = async()=>{
+    try {
+      const theAuthor = await contract.viewResearcher(address)
+      const theAuthorName = theAuthor.name
+      console.log(theAuthorName)
+      if(theAuthorName==""){
+        console.log("this ran")
+        document.location.href = "./researchernew"
+      }
+      else{
+        console.log("that ran")
+        document.location.href = "./researcherprofile"
+      }
+
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const uploadClicked = async()=>{
+    try {
+      const theResearcher = await contract.viewResearcher(address)
+      const bookCid = theResearcher.paperCidArray
+      console.log(bookCid)
+      if(bookCid.length==0){
+        console.log("this ran")
+        document.location.href = "./researchernew"
+      }
+      else{
+        console.log("that ran")
+        document.location.href = "./researchpaperupload"
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <>
       <Head>
@@ -51,11 +97,20 @@ export default function Research() {
           </div>
           <div className=" w-[50%] flex justify-end mt-1 mr-3">
           <div className=" flex h-min mr-2">
-            <button className="bg-[#5a55bf] hover:bg-[#444093] text-white px-4 py-2 m-1 rounded ">Upload a book</button>
-          </div>
-          <div className=" mt-1">
-            <ConnectButton chainStatus="none" showBalance={false} />
-          </div>
+              <button className="bg-[#5a55bf] hover:bg-[#444093] text-white px-4 py-2 m-1 rounded transition-all "
+              onClick={profileClicked}>
+                My Profile
+              </button>
+            </div>
+            <div className=" flex h-min mr-2">
+              <button className="bg-[#5a55bf] hover:bg-[#444093] text-white px-4 py-2 m-1 rounded transition-all "
+              onClick={uploadClicked}>
+                Upload a paper
+              </button>
+            </div>
+            <div className=" mt-1">
+              <ConnectButton chainStatus="none" showBalance={false} />
+            </div>
           </div>
         </div>
 

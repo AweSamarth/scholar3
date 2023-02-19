@@ -150,7 +150,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="bg-black border-2 border-red-600 h-[100vh] text-white">
-        <div>{"Hello " + "!"}</div>
 
         <div className="bg-black mt-4 mb-4 ml-4">
           <ConnectButton

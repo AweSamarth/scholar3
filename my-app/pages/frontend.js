@@ -1,13 +1,13 @@
 import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
-import styles from "@/styles/Home.module.css";
+import styles from "../styles/Home.module.css";
 import {
   ConnectButton,
   midnightTheme,
   darkTheme,
 } from "@rainbow-me/rainbowkit";
-import { abi, RESEARCH_CONTRACT_ADDRESS } from "@/constants";
+import { abi, RESEARCH_CONTRACT_ADDRESS } from "../constants";
 import { Contract, providers, utils } from "ethers";
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,23 +23,24 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.description}>
-          <div className={`${styles["split"]} ${styles["left"]}`}>
-            <div className={styles.centered}>
+          <div className={`${styles.splitLeft} ${styles.left}  border-blue-500 flex justify-center relative`}>
+            <div className=" self-center relative border-red-500 h-[100%] flex">
               <Image
-                className={styles.text1}
-                height={900}
+                className=" self-center"
+                height={1002}
                 width={700}
-                src="/textimg.png"
+                style={{objectFit:"cover", }}
+                src="/textimg.webp"
               ></Image>
             </div>
           </div>
-          <div className={`${styles["split"]} ${styles["right"]}`}>
+          <div className={`${styles.splitRight} ${styles.right}`}>
             <div className={styles.centered}>
-              <div className={styles.loginCard}>
-                <form action="" method="">
-                  <h2 className={styles.heading}>Welcome !</h2>
+              <div className={`${styles.loginCard} border-2`}>
+                
+                  <h2 className={`${styles.heading} border-2`}>Welcome !</h2>
                   <input
-                    className={styles.inputField}
+                    className={`${styles.inputField} border-2 border-red-500`}
                     type="text"
                     placeholder="Username"
                   />
@@ -47,7 +48,6 @@ export default function Home() {
                   <button className={styles.buttonEl1}>Add here</button>
                   <br></br>
                   <button className={styles.buttonEl2}>Create Account</button>
-                </form>
                 <Image className={styles.vector} src="/undrawPic.png" width={400} height={300}></Image>
               </div>
             </div>
