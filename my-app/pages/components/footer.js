@@ -13,9 +13,9 @@ import web from "../../public/web3dotjs.svg"
 
 export default function Footer(){
     return(
-        <footer>
+        <footer className="w-[98.7vw] ">
             <div className="foot-content">
-            <h2 className="font-Michroma font-bold mt-8">Scholar3</h2>
+            <h2 className="font-Michroma text-gray-100 font-bold mt-8">Scholar3</h2>
             <p className="font-Michroma" >Whether you're a student, researcher, or lifelong learner, we're committed to delivering an exceptional experience and making a positive impact in the world through our online library.</p>
             </div>
             <div className="logos">

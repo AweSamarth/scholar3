@@ -1,17 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
-import LibraryCard from "../components/LibraryCard";
-import { TailSpin } from "react-loader-spinner";
-
-import React, { useContext, useEffect, useState } from "react";
-import {
-  ConnectButton,
-  midnightTheme,
-  darkTheme,
-} from "@rainbow-me/rainbowkit";
-import { abi, researchAbi, RESEARCH_CONTRACT_ADDRESS, libraryAbi, LIBRARY_CONTRACT_ADDRESS } from "../../constants";
-import { Contract, providers, utils } from "ethers";
-import Link from "next/link";
+import { Inter } from "@next/font/google";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { RESEARCH_CONTRACT_ADDRESS, researchAbi } from "../../constants";
+import { Contract, providers, utils, BigNumber } from "ethers";
 import {
   useAccount,
   useContract,
@@ -53,6 +45,7 @@ export default function Research() {
             const libraryAuthorObj = await contract.viewAuthor(
               oneBook.theAddress
 
+<<<<<<< HEAD
             );
             console.log(libraryAuthorObj)
             const libraryAuthorName = libraryAuthorObj.name;
@@ -103,6 +96,25 @@ export default function Research() {
         <LibraryCard key={item.id} {...item} />
       </Link>
     );
+=======
+  const [alreadyMember, setAlreadyMember] = useState(false);
+  const { connect, connectors, isLoading, pendingConnector } = useConnect();
+  const [name, setName] = useState("");
+  const readViewResearcher = useContractRead({
+    address: RESEARCH_CONTRACT_ADDRESS,
+    abi: researchAbi,
+    functionName: "viewResearcher",
+    args: [address],
+  });
+
+  
+
+  const readOnesPapers = useContractRead({
+    address: RESEARCH_CONTRACT_ADDRESS,
+    abi: researchAbi,
+    functionName: "viewOnesPapers",
+    args: [address],
+>>>>>>> bd2d3fda56f9f5db122552e9bc0d0e227f47600f
   });
   const profileClicked = async () => {
     try {
@@ -121,6 +133,7 @@ export default function Research() {
     }
   };
 
+<<<<<<< HEAD
   const uploadClicked = async () => {
     try {
       const theAuthor = await contract.viewAuthor(address);
@@ -138,6 +151,41 @@ export default function Research() {
       console.error(error);
     }
   };
+=======
+
+  function viewResearcher() {
+    console.log(readViewResearcher);
+  }
+
+
+  const anarray = readOnesPapers.data
+  // console.log(anarray)
+
+  for(let i =0; i<anarray.length;i++){
+    console.log(anarray[i])
+  }
+
+  function viewMyAddress() {
+    console.log(address);
+  }
+
+  function nameChange(event) {
+    setName(event.target.value);
+  }
+  function anotherChecker(){
+    console.log(cidToPaper)
+  }
+
+  const newResearcherconfig = usePrepareContractWrite({
+    address: RESEARCH_CONTRACT_ADDRESS,
+    abi: researchAbi,
+    functionName: "newResearcher",
+    args: [name],
+  }).config;
+  const newResearcher = useContractWrite(newResearcherconfig).write;
+
+  // console.log(contractHua);
+>>>>>>> bd2d3fda56f9f5db122552e9bc0d0e227f47600f
 
   return (
     <>
