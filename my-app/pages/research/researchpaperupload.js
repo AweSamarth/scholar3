@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useAccount } from "wagmi";
 import { usePrepareContractWrite, useContractWrite } from "wagmi";
-import { abi, RESEARCH_CONTRACT_ADDRESS } from "../../constants";
+import { abi, researchAbi, RESEARCH_CONTRACT_ADDRESS } from "../../constants";
 import { watchContractEvent } from '@wagmi/core'
 
 
@@ -31,7 +31,7 @@ export default function Component() {
   
   const {config, error} = usePrepareContractWrite({
     address:RESEARCH_CONTRACT_ADDRESS,
-    abi: abi,
+    abi: researchAbi,
     functionName:"addPaper",
     args:[title, ipfsCid]
   })
