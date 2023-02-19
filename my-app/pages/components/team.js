@@ -25,7 +25,7 @@ export default function Team() {
         </p>
       </div>
 
-      <div className="cards flex flex-row self-center m-4 ml-0 mt-8">
+      <div className=" flex flex-row self-center m-4 ml-0 mt-8">
         <div class="flex justify-center w-[20rem] m-auto">
           <div class="rounded-lg shadow-lg bg-white max-w-sm">
             <div className="w-[320px] h-[320px] relative"> 

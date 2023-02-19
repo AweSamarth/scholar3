@@ -21,7 +21,6 @@ import {
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useEffect, useState } from "react";
 import { mantle } from "../_app";
-import { check } from "prettier";
 import { watchContractEvent } from '@wagmi/core'
 import { RESPONSE_LIMIT_DEFAULT } from "next/dist/server/api-utils";
 import { use } from "chai";
