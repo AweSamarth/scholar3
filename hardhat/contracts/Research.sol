@@ -54,9 +54,7 @@ contract Research{
     }
 
 
-    function getTime() public view returns(uint256) {
-        return block.timestamp;
-    }
+
 
     function viewAllResearchCids() public view returns(string [] memory){
         return allResearchCids;
