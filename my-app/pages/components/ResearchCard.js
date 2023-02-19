@@ -12,11 +12,11 @@ export default function ResearchCard(props) {
     <div className="flex flex-row mt-[4%] ml-[24.8%]">
       <div className="flex flex-row flex-wrap ">
         <div className="column">
-          <div className=" h-fit w-[120px]">
+          <div className=" h-fit w-[100px]">
             <Image
               width={200}
               height={100}
-              src="/undraw avtaar.png"
+              src="/document.png"
               className="h-[117px]"
             ></Image>
           </div>
