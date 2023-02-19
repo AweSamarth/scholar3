@@ -1,13 +1,13 @@
-.main {
+/* .main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
-}
+} */
 
-.description {
+/* .description {
   display: inherit;
   justify-content: inherit;
   align-items: inherit;
@@ -16,7 +16,7 @@
   width: 100%;
   z-index: 2;
   font-family: var(--font-mono);
-}
+} */
 
 .description a {
   display: flex;
@@ -132,7 +132,7 @@
 
 
 
-
+/* 
 .splitLeft {
     height: 100%;
     width: 35%;
@@ -140,37 +140,35 @@
     z-index: 1;
     top: 0;
     padding-top: 20px;
-  }
-  .splitRight {
+  } 
+   .splitRight {
     height: 100%;
     width: 65%;
     position: absolute;
     z-index: 1;
     top: 0;
-  }
-  .left {
+  } */
+  /* .left {
     left: 0;
     background-color:#2F2E41;
   }
   .right {
     right: 0;
     /* background: linear-gradient(-180deg, rgba(255,255,255,0.50) 0%, rgba(0,0,0,0.50) 100%); */
-    background-color:#cbcbcb;
-     
-  }
+    /* background-color:#cbcbcb; */
   
 
 
 
 
-  .loginCard{
+  /* .loginCard{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     /* max-height: 100vh; */
-  }
+/*   
   .inputField::placeholder {
     text-align: center;
     font-family: 'Martel Sans';
@@ -181,26 +179,26 @@
     text-align: center;
   
   color: rgba(0, 0, 0, 0.52);
-  }
-  .inputField{
+  } */
+  /* .inputField{
   width: 310px;
   height: 34px;
   font-family: 'Martel Sans';
   background: rgb(255, 255, 255);
   border-radius: 9px;
   border: none;
-  }
-  .vector{
+  } */
+  /* .vector{
     margin-top: 10%;
     margin-left: 10%;
-  }
-  .heading{
+  } */
+  /* .heading{
     font-family: 'Martel Sans';
   font-weight: 800;
   font-size: 25px;
   line-height: 40px;
-  }
-  .buttonEl1{
+  } */
+  /* .buttonEl1{
     margin-top: 12%;
     background: #2F2E41;
   border-radius: 13px;
@@ -213,13 +211,13 @@
   text-align: center;
   
   color: #FFFFFF;
-  }
-  .buttonEl1:hover{
+  } */
+  /* .buttonEl1:hover{
     cursor: pointer;
     font-size: 17px;
     line-height: 14px;
-  }
-  .buttonEl2{
+  } */
+  /* .buttonEl2{
     margin-top: 12%;
     width: 310px;
   height: 40px;
@@ -237,4 +235,5 @@
     cursor: pointer;
     font-size: 17px;
     line-height: 14px;
-  }
+    color:yellow
+  } */

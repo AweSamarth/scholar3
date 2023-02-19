@@ -12,5 +12,10 @@ module.exports = {
     },
     extend: {},
   },
+
+
+
   plugins: [],
 }
+
+// font-Inter
