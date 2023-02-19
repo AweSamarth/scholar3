@@ -36,9 +36,9 @@ export default function Home() {
           </div>
           <div className="h-[100%] w-[65%] absolute z-1 top-0 right-0 bg-[#cbcbcb]">
             <div>
-              <div className={`flex flex-col justify-center items-center text-center border-2`}>
+              <div className={`flex flex-col justify-center items-center text-center `}>
                 
-                  <h2 className="mt-[10%] font-Inconsolata font-extrabold text-[40px] leading-[50px] pl-5 pb-4" >Welcome !</h2>
+                  <h2 className="mt-[18%] font-Inconsolata font-extrabold text-[40px] leading-[50px] pl-5 pb-10" >Create Researcher Profile!</h2>
                   <input
                     className="w-[310px] h-[34px] font-Inconsolata bg-white rounded-lg border-none font-medium text-base leading-14 text-center
                     "
@@ -46,8 +46,8 @@ export default function Home() {
                     placeholder="Username"
                   />  
                   <br></br>
-                  <button className="mt-[5%] bg-[#2F2E41] rounded-lg w-[165px] h-[45px] font-Inconsolata font-semibold text-white text-center text-lg hover:bg-black hover:text-[19px] ">Create Account</button>
-                <Image className="mt-[14%] ml-[9%]" src="/undrawPic.png" width={400} height={300}></Image>
+                  <button className=" bg-[#2F2E41] rounded-lg w-[165px] h-[45px] font-Inconsolata font-semibold text-white text-center text-lg hover:bg-black hover:text-[19px] ">Create Account</button>
+                <Image className="mt-[10%]  h-[250px] w-[300px] border-none " src="/undrawPic.png" width={400} height={300}></Image>
               </div>
             </div>
           </div>
