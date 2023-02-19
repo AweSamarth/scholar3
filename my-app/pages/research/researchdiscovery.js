@@ -194,7 +194,7 @@ export default function Research() {
           />
           </div>
         ) : (
-          <div className="cards-grids -mt-20">{content}</div>
+          <div>{content}</div>
         )}
       </main>
     </>
