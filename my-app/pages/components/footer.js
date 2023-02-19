@@ -21,7 +21,6 @@ export default function Footer(){
             <div className="logos">
             <Image src = {git} alt="github logo"/>
             <Image src = {dis} alt="discord logo"/>
-            <Image src = {web} alt="web logo"/>
             </div>
             <span>@2023 Scholar3, Inc.</span>
         </footer>
