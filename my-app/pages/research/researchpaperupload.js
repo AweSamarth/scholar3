@@ -46,7 +46,7 @@ export default function Component() {
     const x = document.getElementById("draggist");
     x.classList.remove("itisdragged");
   }
-  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps } = useDropzone({ onDrop, accept:{"application/pdf":[]} });
 
 
   function handleChange(event) {
@@ -56,7 +56,7 @@ export default function Component() {
 
 
   return (
-    <div className="border-2 flex-col border-white h-full  min-h-screen bg-[#161616] text-white py-4 px-72">
+    <div className=" flex-col border-white h-full  min-h-screen bg-[#161616] text-white py-4 px-72">
       <div className="font-[Poppins] font-bold  text-[2.1em] w-[100%] text-center text-[#F8F8F8]  mb-1">
         Publish A Paper
       </div>
@@ -73,7 +73,7 @@ export default function Component() {
         it. We'll take care of the rest
       </div>
 
-      <div className="mb-8 mt-8">
+      <div className="mb-8 mt-8 ">
         <label htmlFor="title" className=" font-[Inter] font-light text-lg">
           Enter the <span className=" font-bold">title</span> of you research paper
         </label>
@@ -86,20 +86,22 @@ export default function Component() {
           onChange={handleChange}
         />
       </div>
+      <div className="flex w-[100%]  justify-center">
       <div
         id="draggist"
         {...getRootProps()}
-        className="dragger py-52 text-center border-4 border-white bg-[#222222] hover:bg-[#272727]  transition duration-150 hover:cursor-pointer"
+        className="dragger py-52 px-20 text-center border-4 border-white bg-[#222222] hover:bg-[#272727]  transition duration-150 hover:cursor-pointer"
         onDragEnter={dragevent}
         onDragLeave={undragevent}
       >
-        <input {...getInputProps()} className="border-2 border-red" />
+        <input {...getInputProps()} className=" border-red" />
         <p className="text-white font-[Inter]">
           Click to select a paper to upload
         </p>
         <p className="text-white font-[Inter]">
           (dragging and dropping works as well)
         </p>
+      </div>
       </div>
       <div className=" flex border-blue-500 mt-4">
         <div className=" focus:outline-none w-[100%] flex justify-center  border-red-400">
@@ -110,24 +112,11 @@ export default function Component() {
           >
             Publish
           </button>
-          {/* <button
-            
-            className="bg-[#4b9ea1] rounded-sm p-4"
-            onClick={()=>disabler()}
-          >
-            SomeButton
-          </button> */}
+          
         </div>
-        {/* <div>{address !=undefined? address:""}</div> */}
       </div>
       <div>
-        {/* {checker != "" ? (
-          <a href={"https://dweb.link/" + checker}>
-            File uploaded successfully {checker}!
-          </a>
-        ) : (
-          ""
-        )} */}
+
       </div>
     </div>
   );
