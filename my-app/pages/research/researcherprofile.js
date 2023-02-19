@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { RESEARCH_CONTRACT_ADDRESS, abi } from "../../constants";
+import { RESEARCH_CONTRACT_ADDRESS, abi, researchAbi } from "../../constants";
 import { Contract, providers, utils, BigNumber } from "ethers";
 import {
   useAccount,
@@ -30,7 +30,7 @@ export default function Home() {
 
   useContractEvent({
     address: RESEARCH_CONTRACT_ADDRESS ,
-    abi: abi,
+    abi: researchAbi,
     eventName: "ProfileCreated",
     listener(node, label, owner) {
       console.log(node, label, owner)

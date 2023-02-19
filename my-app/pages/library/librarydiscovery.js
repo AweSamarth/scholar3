@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import ResearchCard from "../components/ResearchCard";
+import LibraryCard from "../components/LibraryCard";
 import researchDataLog from "../data/researchDataLog";
 import { TailSpin } from "react-loader-spinner";
 
@@ -101,7 +101,7 @@ export default function Research() {
         rel="noopener noreferrer"
         target="_blank"
       >
-        <ResearchCard key={item.id} {...item} />
+        <LibraryCard key={item.id} {...item} />
       </Link>
     );
   });
@@ -199,7 +199,7 @@ export default function Research() {
           />
           </div>
         ) : (
-          <div>{content}</div>
+          <div  className="cards-grids border-2 mt-20">{content}</div>
         )}
       </main>
     </>
