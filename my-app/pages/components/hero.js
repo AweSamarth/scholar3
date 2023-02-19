@@ -104,7 +104,6 @@ export default function Hero() {
       backgroundImage: `url(${BG.src})`,
       maxWidth: '100%',
       height: "100",
-      border:"2px solid red"
     }}>
       <span className="font-Michroma text-xl mt-4">SCHOLAR3</span>
       <div className=" absolute right-7 top-4">

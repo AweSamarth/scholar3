@@ -12,7 +12,7 @@ import madhav from "../../public/madhav.jpeg";
 
 export default function Team() {
   return (
-    <div className="team bg-gray-100 p-0 m-0 ">
+    <div className="team bg-gray-100 p-0 m-0 w-[98.5vw] ">
       <div className="meet flex flex-row  mt-0 ml-0 mb-16 p-8">
         <h2 className="font-Michroma font-black pl-4 ">
           /meet the team
