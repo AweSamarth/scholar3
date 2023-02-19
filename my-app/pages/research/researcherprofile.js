@@ -1,9 +1,18 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Inter } from "@next/font/google";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { RESEARCH_CONTRACT_ADDRESS, researchAbi } from "../../constants";
-import { Contract, providers, utils, BigNumber } from "ethers";
+import ResearchCard from "../components/ResearchCard";
+import researchDataLog from "../data/researchDataLog";
+import { TailSpin } from "react-loader-spinner";
+
+import React, { useContext, useEffect, useState } from "react";
+import {
+  ConnectButton,
+  midnightTheme,
+  darkTheme,
+} from "@rainbow-me/rainbowkit";
+import { abi, researchAbi, RESEARCH_CONTRACT_ADDRESS } from "../../constants";
+import { Contract, providers, utils } from "ethers";
+import Link from "next/link";
 import {
   useAccount,
   useContract,
@@ -22,9 +31,9 @@ export default function Research() {
   useEffect(() => {
     if (chain) {
       console.log(chain);
-      if (chain.id != 5) {
+      if (chain.id != 5001) {
         console.log("huh");
-        switchNetwork?.(5);
+        switchNetwork?.(5001);
         setState(1);
       }
     }
@@ -36,28 +45,24 @@ export default function Research() {
       setLoading(true);
       let temparr = [];
       try {
-        const allBooks = await contract.viewAllCids();
-        if (allBooks.length > 0) {
-          for (let i = 0; i < allBooks.length; i++) {
-            const oneBook = await contract.viewBook(allBooks[i]);
-            console.log(oneBook);
+        const allPapers = await contract.viewAllResearchCids();
+        if (allPapers.length > 0) {
+          for (let i = 0; i < allPapers.length; i++) {
+            const onePaper = await contract.cidToPaper(allPapers[i]);
+            console.log(onePaper);
             //this gives an object which has the researcher's address, title of the paper, upload date and paper cid
-            const libraryAuthorObj = await contract.viewAuthor(
-              oneBook.theAddress
-
-<<<<<<< HEAD
+            const researcherObj = await contract.viewResearcher(
+              onePaper.theAddress
             );
-            console.log(libraryAuthorObj)
-            const libraryAuthorName = libraryAuthorObj.name;
-            console.log(libraryAuthorName)
-            const date = oneBook.uploadDate._hex;
-            const title = oneBook.title;
-            const id = oneBook.bookCid.slice(7);
+            const researcherName = researcherObj.name;
+            const date = onePaper.uploadDate._hex;
+            const title = onePaper.title;
+            const id = onePaper.paperCid.slice(7);
             console.log(id);
             const obj = {
               id: id,
               title: title,
-              authorName: libraryAuthorName,
+              researcherName: researcherName,
               dop: date,
             };
             temparr.push(obj);
@@ -66,8 +71,7 @@ export default function Research() {
           setArrayOfCards(temparr);
           setLoading(false);
         } else {
-          console.log("No Books found");
-
+          console.log(0);
         }
       } catch (error) {
         console.error(error);
@@ -80,8 +84,8 @@ export default function Research() {
   const provider = useProvider();
   const { data: signer } = useSigner();
   const contract = useContract({
-    address: LIBRARY_CONTRACT_ADDRESS,
-    abi: libraryAbi,
+    address: RESEARCH_CONTRACT_ADDRESS,
+    abi: researchAbi,
     signerOrProvider: signer || provider,
   });
 
@@ -93,104 +97,47 @@ export default function Research() {
         rel="noopener noreferrer"
         target="_blank"
       >
-        <LibraryCard key={item.id} {...item} />
+        <ResearchCard key={item.id} {...item} />
       </Link>
     );
-=======
-  const [alreadyMember, setAlreadyMember] = useState(false);
-  const { connect, connectors, isLoading, pendingConnector } = useConnect();
-  const [name, setName] = useState("");
-  const readViewResearcher = useContractRead({
-    address: RESEARCH_CONTRACT_ADDRESS,
-    abi: researchAbi,
-    functionName: "viewResearcher",
-    args: [address],
-  });
-
-  
-
-  const readOnesPapers = useContractRead({
-    address: RESEARCH_CONTRACT_ADDRESS,
-    abi: researchAbi,
-    functionName: "viewOnesPapers",
-    args: [address],
->>>>>>> bd2d3fda56f9f5db122552e9bc0d0e227f47600f
   });
   const profileClicked = async () => {
     try {
-      const theAuthor = await contract.viewAuthor(address);
+      const theAuthor = await contract.viewResearcher(address);
       const theAuthorName = theAuthor.name;
       console.log(theAuthorName);
       if (theAuthorName == "") {
         console.log("this ran");
-        document.location.href = "./libraryauthornew";
+        document.location.href = "./researchernew";
       } else {
         console.log("that ran");
-        document.location.href = "./libraryauthorprofile";
+        document.location.href = "./researcherprofile";
       }
     } catch (error) {
       console.error(error);
     }
   };
 
-<<<<<<< HEAD
   const uploadClicked = async () => {
     try {
-      const theAuthor = await contract.viewAuthor(address);
-      console.log(theAuthor)
-      const bookCid = theAuthor.bookCidArray;
-      console.log(bookCid);
-      if (theAuthor.name=="") {
+      const theResearcher = await contract.viewResearcher(address);
+      console.log(theResearcher.name);
+      if (theResearcher.name=="") {
         console.log("this ran");
-        document.location.href = "./libraryauthornew";
+        document.location.href = "./researchernew";
       } else {
         console.log("that ran");
-        document.location.href = "./librarybookupload";
+        document.location.href = "./researchpaperupload";
       }
     } catch (error) {
       console.error(error);
     }
   };
-=======
-
-  function viewResearcher() {
-    console.log(readViewResearcher);
-  }
-
-
-  const anarray = readOnesPapers.data
-  // console.log(anarray)
-
-  for(let i =0; i<anarray.length;i++){
-    console.log(anarray[i])
-  }
-
-  function viewMyAddress() {
-    console.log(address);
-  }
-
-  function nameChange(event) {
-    setName(event.target.value);
-  }
-  function anotherChecker(){
-    console.log(cidToPaper)
-  }
-
-  const newResearcherconfig = usePrepareContractWrite({
-    address: RESEARCH_CONTRACT_ADDRESS,
-    abi: researchAbi,
-    functionName: "newResearcher",
-    args: [name],
-  }).config;
-  const newResearcher = useContractWrite(newResearcherconfig).write;
-
-  // console.log(contractHua);
->>>>>>> bd2d3fda56f9f5db122552e9bc0d0e227f47600f
 
   return (
     <>
       <Head>
-        <title>Library Discovery Page</title>
+        <title>Research Paper Discovery Page</title>
         <meta name="description" content="Generated by create next app" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -218,7 +165,7 @@ export default function Research() {
                 className="bg-[#5a55bf] hover:bg-[#444093] text-white px-4 py-2 m-1 rounded transition-all "
                 onClick={uploadClicked}
               >
-                Upload a book
+                Upload a paper
               </button>
             </div>
             <div className=" mt-1">
@@ -227,6 +174,11 @@ export default function Research() {
           </div>
         </div>
 
+        <div className=" text-center">
+          <h2 className="lib-el font-Inconsolata tracking-wide text-[#6862e3] text-[2.5em] font-black">
+            Browse all Research Papers
+          </h2>
+        </div>
         <div className=" text-center">
           <h2 className="lib-el font-Inconsolata tracking-wide text-[#6862e3] text-[2.5em] font-black">
             Your Previous Works
@@ -243,8 +195,6 @@ export default function Research() {
         <div className="text-left mt-[5%] pl-[6%]">
           <h2 className="font-Inconsolata tracking-wide text-[#aeadb5] text-[2.5em] font-black">Past works ⬇️</h2>
         </div>
-
-
         {loading ? (
           <div className="flex justify-center mt-48" >
           <TailSpin
@@ -259,9 +209,14 @@ export default function Research() {
           />
           </div>
         ) : (
-          <div  className="cards-grids mt-24">{content}</div>
+          <div>{content}</div>
         )}
       </main>
     </>
   );
 }
+
+
+
+
+
