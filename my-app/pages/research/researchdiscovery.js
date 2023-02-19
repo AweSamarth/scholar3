@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import ResearchCard from "../components/ResearchCard";
 import researchDataLog from "../data/researchDataLog";
+import { TailSpin } from "react-loader-spinner";
 
 import React, { useContext, useEffect, useState } from "react";
 import {
@@ -12,11 +13,18 @@ import {
 import { abi, researchAbi, RESEARCH_CONTRACT_ADDRESS } from "../../constants";
 import { Contract, providers, utils } from "ethers";
 import Link from "next/link";
-import { useAccount, useContract, useNetwork, useProvider, useSigner, useSwitchNetwork } from "wagmi";
+import {
+  useAccount,
+  useContract,
+  useNetwork,
+  useProvider,
+  useSigner,
+  useSwitchNetwork,
+} from "wagmi";
 
 export default function Research() {
   const { address, isConnecting, isDisconnected, isConnected } = useAccount();
-
+  const [loading, setLoading] = useState(false);
   const [state, setState] = useState(0);
   const { chain } = useNetwork();
   const { chains, error, pendingChainId, switchNetwork } = useSwitchNetwork();
@@ -31,99 +39,101 @@ export default function Research() {
     }
   }, [chains, chain]);
 
-
-  const [arrayOfCards, setArrayOfCards] = useState([])
-    useEffect(()=>{
-        async function getAllPapers(){
-            let temparr=[]
-            try {
-                const allPapers = await contract.viewAllResearchCids()
-                if (allPapers.length>0){
-                for (let i=0; i<allPapers.length;i++){
-                    const onePaper=await contract.cidToPaper(allPapers[i])
-                    console.log(onePaper)
-                    //this gives an object which has the researcher's address, title of the paper, upload date and paper cid
-                    const researcherObj = await contract.viewResearcher(onePaper.theAddress)
-                    const researcherName = researcherObj.name
-                    const date = onePaper.uploadDate._hex
-                    const title = onePaper.title
-                    const id = onePaper.paperCid.slice(7)
-                    console.log(id)
-                    const obj = {id:id, title:title, researcherName:researcherName, dop:date}
-                    temparr.push(obj) 
-                    console.log(temparr)                  
-                    }
-                    setArrayOfCards(temparr)     
-
-                }
-                else{
-                           
-                    console.log(0)
-                }
-
-            } catch (error) {
-                console.error(error)
-
-            }
+  const [arrayOfCards, setArrayOfCards] = useState([]);
+  useEffect(() => {
+    async function getAllPapers() {
+      setLoading(true);
+      let temparr = [];
+      try {
+        const allPapers = await contract.viewAllResearchCids();
+        if (allPapers.length > 0) {
+          for (let i = 0; i < allPapers.length; i++) {
+            const onePaper = await contract.cidToPaper(allPapers[i]);
+            console.log(onePaper);
+            //this gives an object which has the researcher's address, title of the paper, upload date and paper cid
+            const researcherObj = await contract.viewResearcher(
+              onePaper.theAddress
+            );
+            const researcherName = researcherObj.name;
+            const date = onePaper.uploadDate._hex;
+            const title = onePaper.title;
+            const id = onePaper.paperCid.slice(7);
+            console.log(id);
+            const obj = {
+              id: id,
+              title: title,
+              researcherName: researcherName,
+              dop: date,
+            };
+            temparr.push(obj);
+            console.log(temparr);
+          }
+          setArrayOfCards(temparr);
+          setLoading(false);
+        } else {
+          console.log(0);
         }
+      } catch (error) {
+        console.error(error);
+      }
+    }
 
-        getAllPapers()
-    }, [])
+    getAllPapers();
+  }, []);
 
-
-
-
-  const provider = useProvider()
-  const {data:signer} = useSigner()
+  const provider = useProvider();
+  const { data: signer } = useSigner();
   const contract = useContract({
-    address:RESEARCH_CONTRACT_ADDRESS,
+    address: RESEARCH_CONTRACT_ADDRESS,
     abi: researchAbi,
-    signerOrProvider: signer || provider
-  })
+    signerOrProvider: signer || provider,
+  });
 
   const content = arrayOfCards.map((item) => {
     return (
-      <Link href={`https://ipfs.io/ipfs/${item.id}`} key={item.id}  rel="noopener noreferrer" target="_blank">
-    <ResearchCard key={item.id} {...item} />
-    </Link>
+      <Link
+        href={`https://ipfs.io/ipfs/${item.id}`}
+        key={item.id}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <ResearchCard key={item.id} {...item} />
+      </Link>
     );
   });
-  const profileClicked = async()=>{
+  const profileClicked = async () => {
     try {
-      const theAuthor = await contract.viewResearcher(address)
-      const theAuthorName = theAuthor.name
-      console.log(theAuthorName)
-      if(theAuthorName==""){
-        console.log("this ran")
-        document.location.href = "./researchernew"
-      }
-      else{
-        console.log("that ran")
-        document.location.href = "./researcherprofile"
-      }
-
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  const uploadClicked = async()=>{
-    try {
-      const theResearcher = await contract.viewResearcher(address)
-      const bookCid = theResearcher.paperCidArray
-      console.log(bookCid)
-      if(bookCid.length==0){
-        console.log("this ran")
-        document.location.href = "./researchernew"
-      }
-      else{
-        console.log("that ran")
-        document.location.href = "./researchpaperupload"
+      const theAuthor = await contract.viewResearcher(address);
+      const theAuthorName = theAuthor.name;
+      console.log(theAuthorName);
+      if (theAuthorName == "") {
+        console.log("this ran");
+        document.location.href = "./researchernew";
+      } else {
+        console.log("that ran");
+        document.location.href = "./researcherprofile";
       }
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
+
+  const uploadClicked = async () => {
+    try {
+      const theResearcher = await contract.viewResearcher(address);
+      const bookCid = theResearcher.paperCidArray;
+      console.log(bookCid);
+      if (bookCid.length == 0) {
+        console.log("this ran");
+        document.location.href = "./researchernew";
+      } else {
+        console.log("that ran");
+        document.location.href = "./researchpaperupload";
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -143,15 +153,19 @@ export default function Research() {
             </Link>
           </div>
           <div className=" w-[50%] flex justify-end mt-1 mr-3">
-          <div className=" flex h-min mr-2">
-              <button className="bg-[#5a55bf] hover:bg-[#444093] text-white px-4 py-2 m-1 rounded transition-all "
-              onClick={profileClicked}>
+            <div className=" flex h-min mr-2">
+              <button
+                className="bg-[#5a55bf] hover:bg-[#444093] text-white px-4 py-2 m-1 rounded transition-all "
+                onClick={profileClicked}
+              >
                 My Profile
               </button>
             </div>
             <div className=" flex h-min mr-2">
-              <button className="bg-[#5a55bf] hover:bg-[#444093] text-white px-4 py-2 m-1 rounded transition-all "
-              onClick={uploadClicked}>
+              <button
+                className="bg-[#5a55bf] hover:bg-[#444093] text-white px-4 py-2 m-1 rounded transition-all "
+                onClick={uploadClicked}
+              >
                 Upload a paper
               </button>
             </div>
@@ -166,7 +180,22 @@ export default function Research() {
             Browse all Research Papers
           </h2>
         </div>
-        <div className="cards-grids">{content}</div>
+        {loading ? (
+          <div className="flex justify-center mt-48" >
+          <TailSpin
+            height="80"
+            width="80"
+            color="#c3bfc4"
+            ariaLabel="tail-spin-loading"
+            radius="1"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
+          </div>
+        ) : (
+          <div className="cards-grids -mt-20">{content}</div>
+        )}
       </main>
     </>
   );
