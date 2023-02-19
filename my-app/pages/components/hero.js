@@ -7,6 +7,8 @@ import { useAccount } from "wagmi";
 import { useConnectModal, ConnectButton } from "@rainbow-me/rainbowkit";
 import { connect, Connector, InjectedConnector } from "@wagmi/core";
 import "@rainbow-me/rainbowkit/styles.css";
+import BG from '../../public/Background.png';
+
 
 import {
   getDefaultWallets,
@@ -98,7 +100,12 @@ export default function Hero() {
 
 
   return (
-    <div className="hero flex flex-col flex-wrap padding-[1rem] w-[100%] min-h-[100vh]  px-12 bg-[url('../public/Background.png')]  ">
+    <div className="hero flex flex-col flex-wrap padding-[1rem] w-screen min-h-[100vh]  px-12" style={{
+      backgroundImage: `url(${BG.src})`,
+      maxWidth: '100%',
+      height: "100",
+      border:"2px solid red"
+    }}>
       <span className="font-Michroma text-xl mt-4">SCHOLAR3</span>
       <div className=" absolute right-7 top-4">
         <ConnectButton />

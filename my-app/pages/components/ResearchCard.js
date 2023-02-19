@@ -26,6 +26,7 @@ export default function ResearchCard(props) {
             <h2 className=" pl-[15px] text-[40px] font-Michroma font-[500]">
               {props.title}
             </h2>
+
             <p className=" pl-[20px] text-[22px] font-[400] font-Inconsolata">{`Author: ${props.researcherName}`}</p>
             <p className="flex justify-end pr-[3px] font-[700] font-Inconsolata">{`D.O.P: ${date.toLocaleDateString("en-GB")}`}</p>
           </div>

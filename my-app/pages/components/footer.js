@@ -15,8 +15,8 @@ export default function Footer(){
     return(
         <footer>
             <div className="foot-content">
-            <h2 className={inc.className}>Scholar3</h2>
-            <p className= {mich.className}>Whether you're a student, researcher, or lifelong learner, we're committed to delivering an exceptional experience and making a positive impact in the world through our online library.</p>
+            <h2 className="font-Michroma font-bold mt-8">Scholar3</h2>
+            <p className="font-Michroma" >Whether you're a student, researcher, or lifelong learner, we're committed to delivering an exceptional experience and making a positive impact in the world through our online library.</p>
             </div>
             <div className="logos">
             <Image src = {git} alt="github logo"/>
