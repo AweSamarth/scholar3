@@ -176,11 +176,6 @@ export default function Research() {
 
         <div className=" text-center">
           <h2 className="lib-el font-Inconsolata tracking-wide text-[#6862e3] text-[2.5em] font-black">
-            Browse all Research Papers
-          </h2>
-        </div>
-        <div className=" text-center">
-          <h2 className="lib-el font-Inconsolata tracking-wide text-[#6862e3] text-[2.5em] font-black">
             Your Previous Works
           </h2>
         </div>
@@ -195,6 +190,7 @@ export default function Research() {
         <div className="text-left mt-[5%] pl-[6%]">
           <h2 className="font-Inconsolata tracking-wide text-[#aeadb5] text-[2.5em] font-black">Past works ⬇️</h2>
         </div>
+        <div className="pb-12">
         {loading ? (
           <div className="flex justify-center mt-48" >
           <TailSpin
@@ -209,8 +205,9 @@ export default function Research() {
           />
           </div>
         ) : (
-          <div>{content}</div>
+          <div className="">{content}</div>
         )}
+        </div>
       </main>
     </>
   );
