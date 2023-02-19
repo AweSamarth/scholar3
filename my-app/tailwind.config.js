@@ -9,7 +9,10 @@ module.exports = {
     fontFamily:{
       "Michroma":["Michroma", "sans-serif"],
       "Inconsolata":["Inconsolata", "sans-serif"],
-      "Inter":["Inter", "sans-serif"]
+
+      "Inter":["Inter", "sans-serif"],
+      "Popins":["Poppins","sans-serif"]
+
     },
     extend: {},
   },
