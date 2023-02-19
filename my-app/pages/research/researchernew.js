@@ -23,14 +23,7 @@ export default function Home() {
   useEffect(()=>{
 
   }, [])
-  useContractEvent({
-    address: RESEARCH_CONTRACT_ADDRESS ,
-    abi: researchAbi,
-    eventName: "ProfileCreated",
-    listener(node, label, owner) {
-      console.log(node, label, owner)
-    },
-  })
+
   const [alreadyMember, setAlreadyMember] = useState(false);
   const { address, isConnecting, isDisconnected, isConnected } = useAccount();
   const { connect, connectors, isLoading, pendingConnector } = useConnect();
