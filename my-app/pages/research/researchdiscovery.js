@@ -30,6 +30,49 @@ export default function Research() {
       }
     }
   }, [chains, chain]);
+
+
+  const [arrayOfCards, setArrayOfCards] = useState([])
+    useEffect(()=>{
+        async function getAllPapers(){
+            let temparr=[]
+            try {
+                const allPapers = await contract.viewAllResearchCids()
+                if (allPapers.length>0){
+                for (let i=0; i<allPapers.length;i++){
+                    const onePaper=await contract.cidToPaper(allPapers[i])
+                    console.log(onePaper)
+                    //this gives an object which has the researcher's address, title of the paper, upload date and paper cid
+                    const researcherObj = await contract.viewResearcher(onePaper.theAddress)
+                    const researcherName = researcherObj.name
+                    const date = onePaper.uploadDate._hex
+                    const title = onePaper.title
+                    const id = onePaper.paperCid.slice(7)
+                    console.log(id)
+                    const obj = {id:id, title:title, researcherName:researcherName, dop:date}
+                    temparr.push(obj) 
+                    console.log(temparr)                  
+                    }
+                    setArrayOfCards(temparr)     
+
+                }
+                else{
+                           
+                    console.log(0)
+                }
+
+            } catch (error) {
+                console.error(error)
+
+            }
+        }
+
+        getAllPapers()
+    }, [])
+
+
+
+
   const provider = useProvider()
   const {data:signer} = useSigner()
   const contract = useContract({
@@ -38,8 +81,12 @@ export default function Research() {
     signerOrProvider: signer || provider
   })
 
-  const content = researchDataLog.map((item) => {
-    return <ResearchCard key={item.id} {...item} />;
+  const content = arrayOfCards.map((item) => {
+    return (
+      <Link href={`https://ipfs.io/ipfs/${item.id}`} key={item.id}  rel="noopener noreferrer" target="_blank">
+    <ResearchCard key={item.id} {...item} />
+    </Link>
+    );
   });
   const profileClicked = async()=>{
     try {
@@ -86,7 +133,7 @@ export default function Research() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="rese">
+      <main className="rese bg-[#2f2e41] min-h-screen">
         <div className="nav-com  border-red-500 h-min flex justify-between">
           <div className=" w-[50%]">
             <Link href="../">

@@ -30,6 +30,8 @@ export default function Research() {
       }
     }
   }, [chains, chain]);
+
+  
   const provider = useProvider()
   const {data:signer} = useSigner()
   const contract = useContract({

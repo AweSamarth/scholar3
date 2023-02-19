@@ -15,7 +15,6 @@ import {
 } from "wagmi";
 import { useEffect, useState } from "react";
 import { mantle } from "../_app";
-import { check } from "prettier";
 const inter = Inter({ subsets: ["latin"] });
 // if (account!=null){
 // }

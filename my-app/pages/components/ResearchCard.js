@@ -8,7 +8,7 @@ export default function ResearchCard(props) {
       </div>
       <div className="card-content">
         <h2 className="title-el">{props.title}</h2>
-        <p className="auth-el">{props.authorName}</p>
+        <p className="auth-el">{props.researcherName}</p>
         <p className="dop-el">{props.dop}</p>
       </div>
     </div>
