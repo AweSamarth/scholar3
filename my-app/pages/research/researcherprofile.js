@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { RESEARCH_CONTRACT_ADDRESS, abi, researchAbi } from "../../constants";
+import { RESEARCH_CONTRACT_ADDRESS, researchAbi } from "../../constants";
 import { Contract, providers, utils, BigNumber } from "ethers";
 import {
   useAccount,
@@ -43,7 +43,7 @@ export default function Home() {
   const [name, setName] = useState("");
   const readViewResearcher = useContractRead({
     address: RESEARCH_CONTRACT_ADDRESS,
-    abi: abi,
+    abi: researchAbi,
     functionName: "viewResearcher",
     args: [address],
   });
@@ -52,7 +52,7 @@ export default function Home() {
 
   const readOnesPapers = useContractRead({
     address: RESEARCH_CONTRACT_ADDRESS,
-    abi: abi,
+    abi: researchAbi,
     functionName: "viewOnesPapers",
     args: [address],
   });
@@ -83,7 +83,7 @@ export default function Home() {
 
   const newResearcherconfig = usePrepareContractWrite({
     address: RESEARCH_CONTRACT_ADDRESS,
-    abi: abi,
+    abi: researchAbi,
     functionName: "newResearcher",
     args: [name],
   }).config;
