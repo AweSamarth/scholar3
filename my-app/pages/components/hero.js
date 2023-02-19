@@ -78,7 +78,7 @@ export default function Hero() {
       document.location.href = "../library/librarydiscovery"
     }
   return (
-    <div className="hero flex flex-col flex-wrap padding-[1rem] w-[100%] min-h-[100vh]  px-12 bg-[url('../public/Background.png')]  ">
+    <div className="hero flex flex-col flex-wrap padding-[1rem] w-screen min-h-[100vh]  px-12 bg-[url('../public/Background.png')]  ">
       <span className="font-Michroma text-xl mt-4">SCHOLAR3</span>
       <div className=" absolute right-7 top-4"><ConnectButton /></div>
       

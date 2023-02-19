@@ -1,18 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:ital,wght@0,300;0,700;1,300&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Michroma&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Michroma&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-#hello {
+/* #hello {
   color: black;
-}
+} */
 body {
   margin: 0;
-  height: 100vh;
-  /* overflow-x: hidden; */
+  /* height: 100vh; */
+  overflow-x: scroll;
 }
 .landing {
   padding: 0;
@@ -73,58 +73,51 @@ button {
   color: #2f2e41;
 }
 .hello {
-  width: 100vw;
+  /* width: 100vw;
   height: 100vh;
   background: #2f2e41;
   padding: 0;
-  margin: 0;
-  /* background-image: url("../public/About us Background.svg"); */
+  margin: 0; */
 }
-.hello h2 {
+/* .hello h2 {
   top: 100px;
   width: 12rem;
   height: 4rem;
   font-style: normal;
-  /* font-weight: 800; */
   font-size: 3rem;
   line-height: 4rem;
-  /* identical to box height */
 
   text-align: center;
 
   color: #ffffff;
-}
-.hello-content {
+} */
+/* .hello-content {
   display: flex;
   align-items: center;
   flex-direction: row;
   margin: auto;
-}
+} */
 .image Image {
   width: 26rem;
   height: 22rem;
 }
-.hello-content p {
+/* .hello-content p {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   width: 100%;
   height: 7.5rem;
   font-style: normal;
-  /* font-weight: 400; */
   font-size: 1.75rem;
   line-height: 2.125rem;
 
   color: #ffffff;
   margin-left: auto;
-}
-.team {
+} */
+/* .team {
   height: 100vh;
   width: 100vw;
-  /* display: flex;
-    align-items: center;
-    justify-content: ;
-    flex-direction: column; */
+
 }
 .meet {
   display: flex;
@@ -135,7 +128,7 @@ button {
 .meet h2 {
   width: 527px;
   height: 65px;
-  /* font-weight: 800; */
+ 
   font-size: 54px;
   line-height: 65px;
 
@@ -154,7 +147,7 @@ button {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-}
+} */
 
 body {
   margin: 0;
@@ -209,94 +202,44 @@ button {
 
   color: #2f2e41;
 }
-.hello {
-  overflow-y: hidden;
 
-  max-width: 99vw;
-  height: 100vh;
-  background: #2f2e41;
-  padding: 0;
-  margin: 0;
-  background-image: url("../public/About us Background.svg");
-}
-.hello h2 {
-  top: 100px;
-  width: 12rem;
-  height: 4rem;
-  /* font-style: normal; */
-  /* font-weight: 800; */
-  font-size: 3rem;
-  line-height: 4rem;
-  /* identical to box height */
 
-  text-align: center;
-
-  color: #ffffff;
-}
-.hello-content {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  margin: auto;
-}
-.hello-content p {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  width: 100%;
-  height: 7.5rem;
-  /* font-style: normal; */
-  /* font-weight: 400; */
-  font-size: 1.75rem;
-  line-height: 2.125rem;
-
-  color: #ffffff;
-  margin-left: auto;
-}
-.team {
+/* .team {
   height: 100vh;
   width: 100%;
-  /* display: flex;
-  align-items: center;
-  flex-direction: column; */
-}
-.meet {
+
+} */
+/* .meet {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
   flex-direction: row;
-}
+} */
 .meet h2 {
-  width: 33rem;
-  height: 4rem;
-  /* font-weight: 800; */
+  /* width: 33rem;
+  height: 4rem; */
+
   font-size: 3.375rem;
   line-height: 4rem;
-  color: #000000;
+  /* color: #000000; */
 }
 .meet p {
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
   width: 77.5rem;
-  height: 8.1875rem;
+  /* height: 8.1875rem; */
   font-size: 1.75rem;
   line-height: 2.125rem;
   color: #000000;
 }
-.cards {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-.card {
-  width: 20.25rem;
-  height: 27.625rem;
+.card  {
+  width: 16.25rem;
+  height: 20.25rem;
   background: #d9d9d9;
   border-radius: 3.375rem;
   margin: auto;
 }
 footer {
-  width: 97.5vw;
+  width: 100vw;
   height: 50vh;
   background-color: #2f2e41;
   margin: 0;
