@@ -24,30 +24,33 @@ export default function Home() {
       <main className='flex flex-col justify-between items-center p-24 min-h-screen'>
         <div className={"display-inherit ,justify-inherit ,items-inherit, text-xs , w-full ,z-2 ,font-mono"}>
         <div className = "h-[100%] w-[35%] z-10 top-0 pt-[20px] flex justify-center absolute left-0 bg-[#2F2E41]"> 
-          <div className=" self-centre relative">
-          <p className="text-[20px] ml-2 text-white font-Michroma h-0 mb-[37%]">SCHOLAR3</p>
+          <div >
+            <div>
+          <p className="text-[20px] ml-4 text-white font-Michroma h-0 mt-2 mb-[25%]">SCHOLAR3</p>
+          </div>
+          <div >
               <Image
-                className=""
-                height={1002}
+                className="h-[45em] w-[64em]"
+                height={1000}
                 width={700}
-                style={{objectFit:"cover", }}
+                style={{objectFit:"cover", objectPosition:"left" }}
                 src="/textimg.webp"
               ></Image>
-            </div>
+            </div></div>
           </div>
           <div className="h-[100%] w-[65%] absolute z-1 top-0 right-0 bg-[#cbcbcb]">
             <div>
               <div className={`flex flex-col justify-center items-center text-center `}>
                 
-                  <h2 className="mt-[18%] font-Inconsolata font-extrabold text-[40px] leading-[50px] pl-5 pb-10" >Create Researcher Profile!</h2>
+                  <h2 className="mt-[18%] font-Inconsolata font-extrabold text-[40px] leading-[50px] pl-5 pb-8" >Create Researcher Profile!</h2>
                   <input
-                    spellCheck="false" className="w-[310px] h-[34px] font-Inconsolata bg-white rounded-lg border-none font-medium text-base leading-14 text-center
+                    spellCheck="false" className="w-[310px] h-[34px] font-Inconsolata bg-white rounded-lg border-none font-medium text-base leading-12 text-center
                     "
                     type="text"
                     placeholder="Username"
                   />  
-                  <br></br>
-                  <button className=" bg-[#2F2E41] rounded-lg w-[165px] h-[45px] font-Inconsolata font-semibold text-white text-center text-lg hover:bg-black hover:text-[19px] ">Create Account</button>
+                  <br/>
+                  <button className=" bg-[#2F2E41] rounded-lg w-[165px] h-[45px] font-Inconsolata font-semibold text-white text-center text-lg hover:bg-black transition-all ">Create Account</button>
                 <Image className="mt-[10%]  h-[250px] w-[300px] border-none " src="/undrawPic.png" width={400} height={300}></Image>
               </div>
             </div>
