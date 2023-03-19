@@ -161,7 +161,7 @@ export default function Home() {
             <div>{chain.id!=5?(<div>Please connect your wallet to Ethereum Goerli
 
                 <button onClick={()=>switchNetwork(5)}>Sex button</button>
-            </div>):"not sex"}</div>
+            </div>):""}</div>
           <button
             className="bg-blue-500 p-2 rounded-sm"
             onClick={() => authorAdder()}

@@ -14,6 +14,8 @@ import { ThirdwebProvider, ChainId } from '@thirdweb-dev/react';
 
 
 
+
+
 export const mantle ={
   id:5001,
   name:"Mantle Testnet",
@@ -75,3 +77,4 @@ function App({ Component, pageProps }) {
 export default dynamic(() => Promise.resolve(App), {
   ssr: false,
 });
+
