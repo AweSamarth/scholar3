@@ -79,7 +79,7 @@ export default function Research() {
     }
 
     getAllPapers();
-  }, [chains, chain]);
+  }, []);
 
   const provider = useProvider();
   const { data: signer } = useSigner();
