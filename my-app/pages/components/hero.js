@@ -73,25 +73,12 @@ export default function Hero() {
   const { address, isConnecting, isDisconnected, isConnected } = useAccount();
   const { openConnectModal } = useConnectModal();
 
-  async function connectAndOpenResearch() {
-    const result = await connect({
-      connector: new InjectedConnector({ chains })
-    });
-
-    document.location.href = "../research/researchdiscovery";
-  }
 
   function openResearch(){
     document.location.href="../research/researchdiscovery"
   }
 
-  async function connectAndOpenLibrary() {
-    const result = await connect({
-      connector: new InjectedConnector({ chains }),
-    });
 
-    document.location.href = "../library/librarydiscovery";
-  }
 
   function openLibrary(){
     document.location.href ="../library/librarydiscovery"
@@ -137,7 +124,7 @@ export default function Hero() {
           <div className=" border-blue-500 flex">
             <button
               className="research  font-Michroma self-center transition-all hover:bg-[#16161f] "
-              onClick={() => connectAndOpenResearch()}
+              onClick={() => openResearch()}
             >
               Research
             </button>
@@ -157,7 +144,7 @@ export default function Hero() {
         <div className="border-blue-500  flex">
           <button
             className="library font-Michroma self-center transition-all hover:bg-[#f3f3f3] "
-            onClick={connectAndOpenLibrary}
+            onClick={openLibrary}
           >
             Library
           </button>
